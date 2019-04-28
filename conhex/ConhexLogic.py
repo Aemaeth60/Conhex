@@ -7,8 +7,8 @@ On défini la logique suivante pour le board:
 """
 #from copy import deepcopy
 from .Data import *
-import sys
-sys.setrecursionlimit(10000)
+#import sys
+#sys.setrecursionlimit(10000)
 
 class Board():
 
