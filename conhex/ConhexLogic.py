@@ -18,7 +18,7 @@ class Board():
     r_end_areas = [1, 2, 3, 4, 5]
 
     #Tableau de dict composé de {voisines: [aires voisines], pions: [(tuple)}
-    """
+
     playable = [
         [0, 16],
         [2, 4, 6, 8, 10, 12, 14],
@@ -29,10 +29,11 @@ class Board():
         [1, 3, 5, 11, 13, 15],
         [8],
         [1, 3, 5, 7, 9, 11, 13, 15]
-    ]"""
+    ]
 
     areas = pawns_places
 
+    """
     areas_weights = [
         3, 3, 3, 3, 3,
         3, 6, 6, 6, 6, 3,
@@ -43,6 +44,7 @@ class Board():
         6, 6, 6, 6, 6, 6, 6, 3,
         3, 3, 3, 3, 3
     ]
+    """
 
     def __init__(self, n):
         self.n = n  # boar de 17x17 pour les "pions"
