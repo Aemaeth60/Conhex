@@ -8,7 +8,7 @@ On défini la logique suivante pour le board:
 #from copy import deepcopy
 from .Data import *
 import sys
-sys.setrecursionlimit(5000)
+sys.setrecursionlimit(10000)
 
 class Board():
 
@@ -18,6 +18,7 @@ class Board():
     r_end_areas = [1, 2, 3, 4, 5]
 
     #Tableau de dict composé de {voisines: [aires voisines], pions: [(tuple)}
+    """
     playable = [
         [0, 16],
         [2, 4, 6, 8, 10, 12, 14],
@@ -28,7 +29,7 @@ class Board():
         [1, 3, 5, 11, 13, 15],
         [8],
         [1, 3, 5, 7, 9, 11, 13, 15]
-    ]
+    ]"""
 
     areas = pawns_places
 
