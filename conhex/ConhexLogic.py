@@ -1,8 +1,8 @@
 """
 On défini la logique suivante pour le board:
-- -1 la case est jouable (n'appartient à personne)
-- 0 elle appartient au joueur ayant commencé là partie
-- 1 elle appartient au second joueur
+- 0 la case est jouable (n'appartient à personne)
+- 1 elle appartient au joueur ayant commencé là partie
+- -1 elle appartient au second joueur
 - 2 elle n'est pas jouable
 """
 #from copy import deepcopy
@@ -62,15 +62,15 @@ class Board():
         #On rempli les 7 premières lignes
         for i in range(int(self.n/2)):
             for idx in self.playable[i]:
-                self.pawns[i][idx] = -1
-                self.areas_b[i][idx] = -1
+                self.pawns[i][idx] = 0
+                self.areas_b[i][idx] = 0
             self.pawns[int(self.n)-i-1] = self.pawns[i][:]
             self.areas_b[int(self.n)-i-1] = self.pawns[i][:] # on rempli les 7 autres lignes par symétrie
 
         #On rempli la ligne du milieu
         for idx in self.playable[8]:
-            self.pawns[8][idx] = -1
-            self.areas_b[8][idx] = -1
+            self.pawns[8][idx] = 0
+            self.areas_b[8][idx] = 0
 
 
         #self.areas_b = deepcopy(self.pawns)
@@ -78,7 +78,7 @@ class Board():
         it = iter(self.areas)
         for x in self.areas_b:
             for i in range(len(x)):
-                if x[i] == -1:
+                if x[i] == 0:
                     x[i] = next(it)
 
 
@@ -91,7 +91,7 @@ class Board():
 
         for x in range(len(self.pawns)):
             for y in range(len(self.pawns[x])):
-                if self.pawns[x][y] == -1:
+                if self.pawns[x][y] == 0:
                     move = (x, y)
                     moves.append(move)
         return list(moves)
@@ -127,6 +127,7 @@ class Board():
                     self.blue = sorted(self.blue)
 
     def areaRec(self, area):
+        print(self.pawns)
         return areas_dict[int(area)-1]["neighbors"]
 
     def hasWon(self, player):
@@ -150,6 +151,7 @@ class Board():
                     if i in rec:
                         return True
                 rec = list(set(self.areaRec(rec)) & set(player_areas))
+
 
         return False
 
