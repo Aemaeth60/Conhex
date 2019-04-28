@@ -1,6 +1,7 @@
 # Update
 
 Conhex implemented
+
 To DO : test the game with two humans players to see if victory is detected
         plan to do a learning session
 
