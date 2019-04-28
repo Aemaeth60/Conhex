@@ -127,7 +127,6 @@ class Board():
                     self.blue = sorted(self.blue)
 
     def areaRec(self, area):
-        print(self.pawns)
         return areas_dict[int(area)-1]["neighbors"]
 
     def hasWon(self, player):
