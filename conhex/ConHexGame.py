@@ -9,6 +9,8 @@ class ConHexGame(Game):
 
     def __init__(self, n):
         self.n = n
+        self.blue = []
+        self.red = []
 
     def getInitBoard(self):
         # return initial board (numpy board)
