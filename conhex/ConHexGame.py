@@ -49,7 +49,7 @@ class ConHexGame(Game):
             for pawns in board.areas_dict[int(area)-1]["pawns"]:
                 if board.pawns[pawns[0]][pawns[1]] == player:
                     count += 1
-            if count > len(board.areas_dict[int(area)-1]["pawns"])/2:
+            if count > len(board.areas_dict[int(area)-1]["pawns"])/2 + 1:
                 if player == 1:
                     self.red.append(area)
                     self.red = sorted(self.red)
