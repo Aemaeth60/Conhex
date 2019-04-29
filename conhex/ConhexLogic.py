@@ -53,6 +53,7 @@ class Board():
         #Tableau qui stocke les pions détenu par un joueur
         self.red = []  # 1
         self.blue = []  # -1
+        self.areas_dict = areas_dict
 
         #On rempli toutes les cases à 2 (non jouable)
         for i in range(self.n):
@@ -113,6 +114,8 @@ class Board():
         x, y = move[0], move[1]
         self.pawns[x][y] = color
 
+
+        """
         for area in self.areas_b[x][y]:
             count = 0
             for pawns in areas_dict[int(area)-1]["pawns"]:
@@ -125,9 +128,12 @@ class Board():
                 else:
                     self.blue.append(self.areas_b[move[0]][move[1]])
                     self.blue = sorted(self.blue)
+        """
 
+    """
     def areaRec(self, area):
         return areas_dict[int(area)-1]["neighbors"]
+
 
     def hasWon(self, player):
         start = list()
@@ -153,6 +159,7 @@ class Board():
 
 
         return False
+    """
 
     #def getDistance
 

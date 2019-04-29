@@ -35,7 +35,22 @@ class ConHexGame(Game):
         b.pawns = np.copy(board)
         move = (int(action/self.n), action%self.n)
         b.execute_move(move, player)
+        self.getAreas(b, player, move)
         return (b.pawns, -player)
+
+    def getAreas(self, board, player, move):
+        for area in board.areas_b[x][y]:
+            count = 0
+            for pawns in board.areas_dict[int(area)-1]["pawns"]:
+                if board.pawns[pawns[0]][pawns[1]] == color:
+                    count += 1
+            if count > len(areas_dict[int(area)-1]["pawns"]):
+                if color == 1:
+                    self.red.append(board.areas_b[move[0]][move[1]])
+                    self.red = sorted(self.red)
+                else:
+                    self.blue.append(board.areas_b[move[0]][move[1]])
+                    self.blue = sorted(self.blue)
 
     def getValidMoves(self, board, player):
         # return a fixed size binary vector
@@ -60,14 +75,43 @@ class ConHexGame(Game):
         end = list()
         player_areas = list()
         if b.has_legal_moves():
-            if b.hasWon(player):
+            if self.hasWon(player, b):
                 return player
-            elif b.hasWon(-player):
+            elif self.hasWon(-player, b):
                 return -player
             else:
                 return 0
 
         return 0.000001
+
+    def areaRec(self, area, board):
+        return board.areas_dict[int(area)-1]["neighbors"]
+
+
+    def hasWon(self, player, board):
+        start = list()
+        end = list()
+        player_areas = list()
+
+        if player == 1:
+            start = board.r_start_areas
+            end = board.r_end_areas
+            player_areas = board.red
+        else:
+            start = board.b_start_areas
+            end = board.b_end_areas
+            player_areas = board.blue
+
+        for area in start:
+            rec = list(set(self.areaRec(area, board)) & set(player_areas))
+            while len(rec) > 0:
+                for i in end:
+                    if i in rec:
+                        return True
+                rec = list(set(self.areaRec(rec, board)) & set(player_areas))
+
+
+        return False
 
     def getCanonicalForm(self, board, player):
         # return state if player==1, else return -state if player==-1
