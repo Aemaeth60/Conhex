@@ -41,13 +41,13 @@ class ConHexGame(Game):
     def getAreas(self, board, player, move):
 
         x, y = move[0], move[1]
-        
+
         for area in board.areas_b[x][y]:
             count = 0
             for pawns in board.areas_dict[int(area)-1]["pawns"]:
-                if board.pawns[pawns[0]][pawns[1]] == color:
+                if board.pawns[pawns[0]][pawns[1]] == player:
                     count += 1
-            if count > len(areas_dict[int(area)-1]["pawns"]):
+            if count > len(board.areas_dict[int(area)-1]["pawns"]):
                 if color == 1:
                     self.red.append(board.areas_b[move[0]][move[1]])
                     self.red = sorted(self.red)
