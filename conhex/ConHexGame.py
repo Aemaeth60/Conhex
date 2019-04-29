@@ -113,7 +113,8 @@ class ConHexGame(Game):
                 for i in end:
                     if i in rec:
                         return True
-                rec = list(set(self.areaRec(rec, board)) & set(player_areas))
+                for areas in rec:
+                    rec = list(set(self.areaRec(areas, board)) & set(player_areas))
 
 
         return False
