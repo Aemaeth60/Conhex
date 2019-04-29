@@ -39,6 +39,9 @@ class ConHexGame(Game):
         return (b.pawns, -player)
 
     def getAreas(self, board, player, move):
+
+        x, y = move[0], move[1]
+        
         for area in board.areas_b[x][y]:
             count = 0
             for pawns in board.areas_dict[int(area)-1]["pawns"]:
