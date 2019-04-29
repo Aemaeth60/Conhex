@@ -43,16 +43,18 @@ class ConHexGame(Game):
         x, y = move[0], move[1]
 
         for area in board.areas_b[x][y]:
+            if area in self.red or area in self.blue:
+                continue
             count = 0
             for pawns in board.areas_dict[int(area)-1]["pawns"]:
                 if board.pawns[pawns[0]][pawns[1]] == player:
                     count += 1
-            if count > len(board.areas_dict[int(area)-1]["pawns"]):
-                if color == 1:
-                    self.red.append(board.areas_b[move[0]][move[1]])
+            if count > len(board.areas_dict[int(area)-1]["pawns"])/2:
+                if player == 1:
+                    self.red.append(area)
                     self.red = sorted(self.red)
                 else:
-                    self.blue.append(board.areas_b[move[0]][move[1]])
+                    self.blue.append(area)
                     self.blue = sorted(self.blue)
 
     def getValidMoves(self, board, player):
