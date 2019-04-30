@@ -12,10 +12,10 @@ from .Data import *
 
 class Board():
 
-    b_start_areas = [1, 6, 17, 28, 37]
-    b_end_areas = [5, 11, 24, 36, 41]
-    r_start_areas = [37, 38, 39, 40, 41]
-    r_end_areas = [1, 2, 3, 4, 5]
+    r_start_areas = [1, 6, 17, 28, 37]
+    r_end_areas = [5, 11, 24, 36, 41]
+    b_start_areas = [37, 38, 39, 40, 41]
+    b_end_areas = [1, 2, 3, 4, 5]
 
     #Tableau de dict composé de {voisines: [aires voisines], pions: [(tuple)}
 
