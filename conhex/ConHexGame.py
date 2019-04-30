@@ -90,18 +90,22 @@ class ConHexGame(Game):
         return 0.000001
 
     def areaRec(self, area, board, end , player_areas, visited):
+        visited.append(area)
         if area in player_areas:
-            print('in')
+            #print('in')
             if area in end:
-                print('end')
+                #print('end')
                 return True
             else:
-                print(player_areas ,"Nonend")
+                #print(player_areas ,"Nonend")
                 for i in board.areas_dict[int(area)-1]["neighbors"]:
+                    ret = False
                     if i not in visited:
-                        print("enter condition1")
-                        visited.append(i)
-                        return self.areaRec(i, board, end, player_areas,visited)
+                        #print("enter condition1")
+                        #visited.append(i
+                        #print("call rec with ", i, visited, player_areas)
+                        ret |= self.areaRec(i, board, end, player_areas,visited)
+                        return ret
         return False
     #list(set(board.areas_dict[int(area)-1]["neighbors"]) & set(player_areas))
 
@@ -120,6 +124,7 @@ class ConHexGame(Game):
             end = board.b_end_areas
             player_areas = self.blue
 
+        print(player, "player")
         ret = False
         for area in start:
             ret |= self.areaRec(area, board, end, player_areas, [])
