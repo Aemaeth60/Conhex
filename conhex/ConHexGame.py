@@ -98,14 +98,16 @@ class ConHexGame(Game):
                 return True
             else:
                 #print(player_areas ,"Nonend")
+                ret = False
                 for i in board.areas_dict[int(area)-1]["neighbors"]:
-                    ret = False
                     if i not in visited:
                         #print("enter condition1")
                         #visited.append(i
                         #print("call rec with ", i, visited, player_areas)
-                        ret |= self.areaRec(i, board, end, player_areas,visited)
-                        return ret
+                        temp_ret = self.areaRec(i, board, end, player_areas,visited)
+                        #print(temp_ret, "temp")
+                        ret = ret | temp_ret
+                return ret
         return False
     #list(set(board.areas_dict[int(area)-1]["neighbors"]) & set(player_areas))
 
@@ -128,6 +130,7 @@ class ConHexGame(Game):
         ret = False
         for area in start:
             ret |= self.areaRec(area, board, end, player_areas, [])
+            print("ret main", ret)
         return ret
 
     def getCanonicalForm(self, board, player):
