@@ -51,8 +51,8 @@ class Board():
         self.pawns = [None]*self.n  # On créé les colonnes
         self.areas_b = [None]*self.n # Tableau qui associe les zones aux pions
         #Tableau qui stocke les pions détenu par un joueur
-        self.red = []  # 1
-        self.blue = []  # -1
+        #self.red = []  # 1
+        #self.blue = []  # -1
         self.areas_dict = areas_dict
 
         #On rempli toutes les cases à 2 (non jouable)

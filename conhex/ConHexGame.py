@@ -90,15 +90,18 @@ class ConHexGame(Game):
         return 0.000001
 
     def areaRec(self, area, board, end , player_areas, visited):
-        print(area)
         if area in player_areas:
+            print('in')
             if area in end:
+                print('end')
                 return True
             else:
+                print(player_areas ,"Nonend")
                 for i in board.areas_dict[int(area)-1]["neighbors"]:
                     if i not in visited:
+                        print("enter condition1")
                         visited.append(i)
-                        return areaRec(i, start, end, player_areas)
+                        return self.areaRec(i, board, end, player_areas,visited)
         return False
     #list(set(board.areas_dict[int(area)-1]["neighbors"]) & set(player_areas))
 
@@ -111,16 +114,15 @@ class ConHexGame(Game):
         if player == 1:
             start = board.r_start_areas
             end = board.r_end_areas
-            player_areas = board.red
+            player_areas = self.red
         else:
             start = board.b_start_areas
             end = board.b_end_areas
-            player_areas = board.blue
+            player_areas = self.blue
 
         ret = False
         for area in start:
             ret |= self.areaRec(area, board, end, player_areas, [])
-
         return ret
 
     def getCanonicalForm(self, board, player):
