@@ -23,7 +23,7 @@ class ConHexGame(Game):
 
     def getActionSize(self):
         # return number of actions
-        #return sum(len(x) for x in Board.playable)
+        #return sum(len(x) for x in Board.playable) +1
         return self.n*self.n + 1
 
     def getNextState(self, board, player, action):
@@ -35,9 +35,22 @@ class ConHexGame(Game):
         b.pawns = np.copy(board)
         move = (int(action/self.n), action%self.n)
         b.execute_move(move, player)
-        self.getAreas(b, player, move)
+        #self.getAreas(b, player, move)
         return (b.pawns, -player)
 
+    def getAreas(self, board, player):
+
+        p_areas = set()
+        for i in range(len(board.areas_dict)):
+            count = 0
+            for (x,y) in board.areas_dict[i]["pawns"]:
+                if board.pawns[x][y] == player:
+                    count += 1
+            if count >= len(board.areas_dict[i]["pawns"])/2:
+                p_areas.add(i-1)
+        return list(p_areas)
+
+    """
     def getAreas(self, board, player, move):
 
         x, y = move[0], move[1]
@@ -46,16 +59,19 @@ class ConHexGame(Game):
             if area in self.red or area in self.blue:
                 continue
             count = 0
-            for pawns in board.areas_dict[int(area)-1]["pawns"]:
-                if board.pawns[pawns[0]][pawns[1]] == player:
+            for (x,y) in board.areas_dict[int(area)-1]["pawns"]:
+                if board.pawns[x][y] == player:
+                    print(x, y)
                     count += 1
             if count >= len(board.areas_dict[int(area)-1]["pawns"])/2:
+                display(board.pawns)
                 if player == 1:
                     self.red.append(area)
                     self.red = sorted(self.red)
                 else:
                     self.blue.append(area)
                     self.blue = sorted(self.blue)
+    """
 
     def getValidMoves(self, board, player):
         # return a fixed size binary vector
@@ -81,8 +97,10 @@ class ConHexGame(Game):
         player_areas = list()
         if b.has_legal_moves():
             if self.hasWon(player, b):
+                red = []
                 return player
             elif self.hasWon(-player, b):
+                blue = []
                 return -player
             else:
                 return 0
@@ -108,16 +126,17 @@ class ConHexGame(Game):
     def hasWon(self, player, board):
         start = list()
         end = list()
-        player_areas = list()
+        player_areas = self.getAreas(board, player)
 
         if player == 1:
             start = board.r_start_areas
             end = board.r_end_areas
-            player_areas = self.red
         else:
             start = board.b_start_areas
             end = board.b_end_areas
-            player_areas = self.blue
+
+        #display(board.pawns)
+        #print(player_areas, player)
 
         ret = False
         for area in start:

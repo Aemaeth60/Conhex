@@ -88,13 +88,12 @@ class Board():
 
 
     def get_legal_moves(self):
-        moves = []
+        moves = set()
 
         for x in range(len(self.pawns)):
             for y in range(len(self.pawns[x])):
                 if self.pawns[x][y] == 0:
-                    move = (x, y)
-                    moves.append(move)
+                    moves.add((x,y))
         return list(moves)
 
     def has_legal_moves(self):
@@ -112,6 +111,7 @@ class Board():
         # Add the piece to the empty square.
         # print(move)
         x, y = move[0], move[1]
+        assert self.pawns[x][y] == 0
         self.pawns[x][y] = color
 
 
