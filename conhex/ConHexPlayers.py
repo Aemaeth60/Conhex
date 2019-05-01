@@ -1,4 +1,5 @@
 import numpy as np
+import time
 
 
 class RandomPlayer():
@@ -10,6 +11,7 @@ class RandomPlayer():
         valids = self.game.getValidMoves(board, 1)
         while valids[a]!=1:
             a = np.random.randint(self.game.getActionSize())
+        time.sleep(1)
         return a
 
 
