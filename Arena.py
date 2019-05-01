@@ -55,6 +55,7 @@ class Arena():
             board, curPlayer = self.game.getNextState(board, curPlayer, action)
         if verbose:
             assert(self.display)
+            print()
             print("Areas player red : ", self.game.red)
             print("Areas player blue : ", self.game.blue)
             print("Game over: Turn ", str(it), "Result ", str(self.game.getGameEnded(board, 1)))
