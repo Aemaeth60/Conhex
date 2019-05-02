@@ -9,8 +9,6 @@ class ConHexGame(Game):
 
     def __init__(self, n):
         self.n = n
-        self.blue = []
-        self.red = []
 
     def getInitBoard(self):
         # return initial board (numpy board)
@@ -35,43 +33,8 @@ class ConHexGame(Game):
         b.pawns = np.copy(board)
         move = (int(action/self.n), action%self.n)
         b.execute_move(move, player)
-        #self.getAreas(b, player, move)
         return (b.pawns, -player)
 
-    def getAreas(self, board, player):
-
-        p_areas = set()
-        for i in range(len(board.areas_dict)):
-            count = 0
-            for (x,y) in board.areas_dict[i]["pawns"]:
-                if board.pawns[x][y] == player:
-                    count += 1
-            if count >= len(board.areas_dict[i]["pawns"])/2:
-                p_areas.add(i-1)
-        return list(p_areas)
-
-    """
-    def getAreas(self, board, player, move):
-
-        x, y = move[0], move[1]
-
-        for area in board.areas_b[x][y]:
-            if area in self.red or area in self.blue:
-                continue
-            count = 0
-            for (x,y) in board.areas_dict[int(area)-1]["pawns"]:
-                if board.pawns[x][y] == player:
-                    print(x, y)
-                    count += 1
-            if count >= len(board.areas_dict[int(area)-1]["pawns"])/2:
-                display(board.pawns)
-                if player == 1:
-                    self.red.append(area)
-                    self.red = sorted(self.red)
-                else:
-                    self.blue.append(area)
-                    self.blue = sorted(self.blue)
-    """
 
     def getValidMoves(self, board, player):
         # return a fixed size binary vector
@@ -92,56 +55,16 @@ class ConHexGame(Game):
         # player = 1
         b = Board(self.n)
         b.pawns = np.copy(board)
-        start = list()
-        end = list()
-        player_areas = list()
+
+        if b.hasWon(player):
+            return player
+        elif b.hasWon(-player):
+            return -player
+
         if b.has_legal_moves():
-            if self.hasWon(player, b):
-                red = []
-                return player
-            elif self.hasWon(-player, b):
-                blue = []
-                return -player
-            else:
-                return 0
+            return 0
 
         return 0.000001
-
-    def areaRec(self, area, board, end , player_areas, visited):
-        visited.append(area)
-        if area in player_areas:
-            if area in end:
-                return True
-            else:
-                ret = False
-                for i in board.areas_dict[int(area)-1]["neighbors"]:
-                    if i not in visited:
-                        temp_ret = self.areaRec(i, board, end, player_areas,visited)
-                        ret = ret | temp_ret
-                return ret
-        return False
-    #list(set(board.areas_dict[int(area)-1]["neighbors"]) & set(player_areas))
-
-
-    def hasWon(self, player, board):
-        start = list()
-        end = list()
-        player_areas = self.getAreas(board, player)
-
-        if player == 1:
-            start = board.r_start_areas
-            end = board.r_end_areas
-        else:
-            start = board.b_start_areas
-            end = board.b_end_areas
-
-        #display(board.pawns)
-        #print(player_areas, player)
-
-        ret = False
-        for area in start:
-            ret |= self.areaRec(area, board, end, player_areas, [])
-        return ret
 
     def getCanonicalForm(self, board, player):
         # return state if player==1, else return -state if player==-1

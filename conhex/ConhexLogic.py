@@ -84,20 +84,25 @@ class Board():
 
 
     def __getitem__(self, index):
-        return self.pawns
+        return self.pawns[index]
 
 
     def get_legal_moves(self):
         moves = set()
 
-        for x in range(len(self.pawns)):
-            for y in range(len(self.pawns[x])):
+        for x in range(self.n):
+            for y in range(self.n):
                 if self.pawns[x][y] == 0:
                     moves.add((x,y))
         return list(moves)
 
     def has_legal_moves(self):
-        return True if len(self.get_legal_moves()) > 0 else False
+        #return True if len(self.get_legal_moves()) > 0 else False
+        for x in range(self.n):
+            for y in range(self.n):
+                if self.pawns[x][y] == 0:
+                    return True
+        return False
 
 
     def execute_move(self, move, color):
@@ -110,58 +115,59 @@ class Board():
 
         # Add the piece to the empty square.
         # print(move)
-        x, y = move[0], move[1]
-        assert self.pawns[x][y] == 0
-        self.pawns[x][y] = color
+        (x, y) = move
+        assert self[x][y] == 0
+        self[x][y] = color
 
 
-        """
-        for area in self.areas_b[x][y]:
+    def __getAreas(self, player):
+
+        p_areas = set()
+        for i in range(len(self.areas_dict)):
             count = 0
-            for pawns in areas_dict[int(area)-1]["pawns"]:
-                if self.pawns[pawns[0]][pawns[1]] == color:
+            for (x,y) in self.areas_dict[i]["pawns"]:
+                if self.pawns[x][y] == player:
                     count += 1
-            if count > len(areas_dict[int(area)-1]["pawns"]):
-                if color == 1:
-                    self.red.append(self.areas_b[move[0]][move[1]])
-                    self.red = sorted(self.red)
-                else:
-                    self.blue.append(self.areas_b[move[0]][move[1]])
-                    self.blue = sorted(self.blue)
-        """
+            if count >= len(self.areas_dict[i]["pawns"])/2:
+                p_areas.add(i-1)
+        return list(p_areas)
 
-    """
-    def areaRec(self, area):
-        return areas_dict[int(area)-1]["neighbors"]
+
+    def __areaRec(self, area, end , player_areas, visited):
+        visited.append(area)
+        if area in player_areas:
+            if area in end:
+                return True
+            else:
+                ret = False
+                for i in self.areas_dict[int(area)-1]["neighbors"]:
+                    if i not in visited:
+                        temp_ret = self.__areaRec(i, end, player_areas,visited)
+                        ret = ret | temp_ret
+                return ret
+        return False
+    #list(set(board.areas_dict[int(area)-1]["neighbors"]) & set(player_areas))
 
 
     def hasWon(self, player):
-        start = list()
-        end = list()
-        player_areas = list()
+        start = []
+        end = []
+        player_areas = self.__getAreas(player)
 
         if player == 1:
             start = self.r_start_areas
             end = self.r_end_areas
-            player_areas = self.red
         else:
             start = self.b_start_areas
             end = self.b_end_areas
-            player_areas = self.blue
 
+        #display(board.pawns)
+        #print(player_areas, player)
+
+        ret = False
         for area in start:
-            rec = list(set(self.areaRec(area)) & set(player_areas))
-            while len(rec) > 0:
-                for i in end:
-                    if i in rec:
-                        return True
-                rec = list(set(self.areaRec(rec)) & set(player_areas))
-
-
-        return False
-    """
-
-    #def getDistance
+            ret |= self.__areaRec(area, end, player_areas, [])
+        return ret
 
 
     def debug(self):
