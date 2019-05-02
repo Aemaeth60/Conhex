@@ -120,7 +120,7 @@ class Board():
         self[x][y] = color
 
 
-    def __getAreas(self, player):
+    def getAreas(self, player):
 
         p_areas = set()
         for i in range(len(self.areas_dict)):
@@ -152,7 +152,7 @@ class Board():
     def hasWon(self, player):
         start = []
         end = []
-        player_areas = self.__getAreas(player)
+        player_areas = self.getAreas(player)
 
         if player == 1:
             start = self.r_start_areas
