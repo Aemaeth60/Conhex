@@ -129,7 +129,7 @@ class Board():
                 if self.pawns[x][y] == player:
                     count += 1
             if count >= len(self.areas_dict[i]["pawns"])/2:
-                p_areas.add(i-1)
+                p_areas.add(i+1)
         return list(p_areas)
 
 

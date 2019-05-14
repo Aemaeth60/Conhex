@@ -32,8 +32,8 @@ class ConHexGame(Game):
         b = Board(self.n)
         b.pawns = np.copy(board)
         move = (int(action/self.n), action%self.n)
-        if(board[move[0]][move[1]] != 0):
-            return (board, -player)
+        #if(board[move[0]][move[1]] != 0):
+        #    return (board, -player)
         b.execute_move(move, player)
         return (b.pawns, -player)
 
