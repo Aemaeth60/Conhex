@@ -116,7 +116,11 @@ class Board():
         # Add the piece to the empty square.
         # print(move)
         (x, y) = move
-        assert self[x][y] == 0
+        #assert self[x][y] == 0
+        if(self[x][y] == 0):
+            print("Erreur aux coordonnées : ", x, y)
+            raise AssertionError()
+            
         self[x][y] = color
 
 
