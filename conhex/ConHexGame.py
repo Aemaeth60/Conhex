@@ -27,7 +27,7 @@ class ConHexGame(Game):
     def getNextState(self, board, player, action):
         # if player takes action on board, return next (board,player)
         # action must be a valid move
-        print("Score sur getNextState", self.getScore(board, player))
+        print("Board sur getNextState", self.getValidMoves(board, player))
         if action == self.n*self.n:
             return (board, -player)
         b = Board(self.n)
