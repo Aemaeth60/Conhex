@@ -99,9 +99,9 @@ class ConHexGame(Game):
         score = 0
 
         if player == 1:
-            score = len(b.red)
+            score = len(b.getAreas(player))
         else:
-            score = len(b.blue)
+            score = len(b.getAreas(-player))
         return score
 
 
