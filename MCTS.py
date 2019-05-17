@@ -110,6 +110,8 @@ class MCTS():
                     cur_best = u
                     best_act = a
 
+        if(best_act == -1):
+            print("Action = -1")
         a = best_act
         next_s, next_player = self.game.getNextState(canonicalBoard, 1, a)
         next_s = self.game.getCanonicalForm(next_s, next_player)
