@@ -111,7 +111,7 @@ class MCTS():
                     best_act = a
 
         a = best_act
-        print("Score sur MCTS", self.getScore(canonicalBoard, 1))
+        print("Score sur MCTS", self.game.getScore(canonicalBoard, 1))
         next_s, next_player = self.game.getNextState(canonicalBoard, 1, a)
         next_s = self.game.getCanonicalForm(next_s, next_player)
 
