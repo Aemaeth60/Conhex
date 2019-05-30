@@ -6,7 +6,7 @@ On défini la logique suivante pour le board:
 - 2 elle n'est pas jouable
 """
 #from copy import deepcopy
-from .Data import *
+from Data import *
 #import sys
 #sys.setrecursionlimit(10000)
 
