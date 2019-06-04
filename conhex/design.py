@@ -1,10 +1,10 @@
-import pygame
+import pygame,math
 from pygame.locals import *
 
 colorBoard = (255,255,255)
 colorNode = (0,0,0)
 colorLine = (0,0,1)
-sizeNode = 6
+sizeNode = 8
 sizeLine = 1
 blue = (0,0,255)
 
@@ -24,8 +24,9 @@ pos = [(10,10),(490,10),  #480/16 =30
         (130,400),(190,400),(250,400),(310,400),(370,400),
         (40,430),(460,430),
         (70,460),(130,460),(190,460),(250,460),(310,460),(370,460),(430,460),
-
         (10,490),(490,490)] 
+
+circles = []
 
 screen = pygame.display.set_mode((750,500))
 
@@ -40,6 +41,7 @@ def main():
      
     # main loop
     while running:
+        pos = pygame.mouse.get_pos()
         # event handling, gets all event from the event queue
         for event in pygame.event.get():
             # only do something if the event is of type QUIT
@@ -47,20 +49,26 @@ def main():
                 # change the value to False, to exit the main loop
                 running = False
             elif event.type == pygame.MOUSEBUTTONDOWN:
-                click = screen.get_at(pygame.mouse.get_pos()) == colorNode
-                if click == 1:
-                    print(pygame.mouse.get_pos())
+                for i in circles:  #i[0] = x && i[1] = y
+                    absx = abs(i[0]-pos[0])
+                    absy = abs(i[1]-pos[1])
+                    if absx < 12 and absy <12:
+                        #pygame.draw.circle(screen,blue,(i[0],i[1]),sizeNode)
+                        screen.fill(blue,i)
+                print(pygame.mouse.get_pos())
+                pygame.display.update()
 
-    
+
 def drawBoard():
     for i in range(len(pos)):
-        pygame.draw.circle(screen,colorNode,pos[i],sizeNode);
+        circles.append(pygame.draw.circle(screen,colorNode,pos[i],sizeNode))
+        
 
     #CARRE BASE
-    pygame.draw.line(screen,colorLine,pos[0],pos[1],sizeLine);
-    pygame.draw.line(screen,colorLine,pos[1],pos[68],sizeLine);
-    pygame.draw.line(screen,colorLine,pos[0],pos[67],sizeLine);
-    pygame.draw.line(screen,colorLine,pos[67],pos[68],sizeLine);
+    pygame.draw.line(screen,colorLine,pos[0],pos[1],sizeLine)
+    pygame.draw.line(screen,colorLine,pos[1],pos[68],sizeLine)
+    pygame.draw.line(screen,colorLine,pos[0],pos[67],sizeLine)
+    pygame.draw.line(screen,colorLine,pos[67],pos[68],sizeLine)
 
     #OUTSIDE HAUT
     pygame.draw.line(screen,colorLine,pos[2],(70,10),sizeLine);
@@ -169,6 +177,8 @@ def drawBoard():
     pygame.draw.line(screen,colorLine,pos[33],pos[39],sizeLine);
     pygame.draw.line(screen,colorLine,pos[35],pos[39],sizeLine);
     pygame.draw.line(screen,colorLine,pos[29],pos[35],sizeLine);
+
+
    
     pygame.display.update();
 # run the main function only if this module is executed as the main script
