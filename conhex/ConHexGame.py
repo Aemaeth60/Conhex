@@ -9,6 +9,8 @@ class ConHexGame(Game):
 
     def __init__(self, n):
         self.n = n
+        self.r_areas = []
+        self.b_areas = []
 
     def getInitBoard(self):
         # return initial board (numpy board)
@@ -31,6 +33,23 @@ class ConHexGame(Game):
             return (board, -player)
         b = Board(self.n)
         b.pawns = np.copy(board)
+
+        areas = []
+        if(player == 1):
+            areas = np.copy(self.r_areas)
+        else:
+            areas = np.copy(self.b_areas)
+
+        ret = b.getAreas(player, areas)
+
+        if(player==1):
+            self.r_areas = np.copy(ret)
+        else:
+            self.b_areas = np.copy(ret)
+
+        print("Areas player red : ", self.r_areas)
+        print("Areas player blue : ", self.b_areas)
+
         move = (int(action/self.n), action%self.n)
         #if(board[move[0]][move[1]] != 0):
         #    return (board, -player)
@@ -51,6 +70,10 @@ class ConHexGame(Game):
             valids[self.n*x+y]=1
         return np.array(valids)
 
+    def cleanAreas(self):
+        self.r_areas = []
+        self.b_areas = []
+
 
     def getGameEnded(self, board, player):
         # return 0 if not ended, 1 if player 1 won, -1 if player 1 lost
@@ -58,13 +81,20 @@ class ConHexGame(Game):
         b = Board(self.n)
         b.pawns = np.copy(board)
 
-        if b.hasWon(player):
+        r_won = b.hasWon(player)
+        b_won = b.hasWon(-player)
+
+        if r_won:
+            self.cleanAreas()
             return player
-        elif b.hasWon(-player):
+        elif b_won:
+            self.cleanAreas()
             return -player
 
         if b.has_legal_moves():
             return 0
+
+        self.cleanAreas()
 
         return 0.000001
 
@@ -107,12 +137,12 @@ class ConHexGame(Game):
 def display(board):
     #board.debug()
     n = board.shape[0]
-    b = Board(self.n)
-    b.pawns = np.copy(board)
+    #b = Board(n)
+    #b.pawns = np.copy(board)
 
 
-    print("Areas player red : ", b.getAreas(1))
-    print("Areas player blue : ", b.getAreas(-1))
+    #print("Areas player red : ", b.r_areas)
+    #print("Areas player blue : ", b.b_areas)
     for y in range(n):
         print (y,"|",end="")
     print("")

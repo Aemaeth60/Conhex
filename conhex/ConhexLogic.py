@@ -6,7 +6,7 @@ On défini la logique suivante pour le board:
 - 2 elle n'est pas jouable
 """
 #from copy import deepcopy
-from Data import *
+from .Data import *
 #import sys
 #sys.setrecursionlimit(10000)
 
@@ -124,17 +124,21 @@ class Board():
         self[x][y] = color
 
 
-    def getAreas(self, player):
-
+    def getAreas(self, player, player_areas):
         p_areas = set()
         for i in range(len(self.areas_dict)):
             count = 0
+            if int(i+1) in player_areas:
+                continue
             for (x,y) in self.areas_dict[i]["pawns"]:
                 if self.pawns[x][y] == player:
                     count += 1
             if count >= len(self.areas_dict[i]["pawns"])/2:
                 p_areas.add(i+1)
-        return list(p_areas)
+        p_areas = list(p_areas)
+        p_areas.extend(player_areas)
+        p_areas = list(sorted(set(p_areas)))
+        return p_areas
 
 
     def __areaRec(self, area, end , player_areas, visited):
@@ -156,8 +160,7 @@ class Board():
     def hasWon(self, player):
         start = []
         end = []
-        player_areas = self.getAreas(player)
-
+        player_areas = self.getAreas(player, [])
         if player == 1:
             start = self.r_start_areas
             end = self.r_end_areas
