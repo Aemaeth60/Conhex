@@ -126,6 +126,47 @@ class Board():
         self[x][y] = color
 
 
+    def getAreas(self, red, blue):
+        p_areas_red = set()
+        p_areas_blue = set()
+        canonical = False
+        a = [(x,y) for x,y in zip (range(self.n), range(self.n))]
+        for x,y in a:
+            if self.pawns[x][y] ==2:
+                break
+            elif self.pawns[x][y] == -2:
+                canonical = True
+                break
+
+
+        for i in range(len(self.areas_dict)):
+            count_red = 0
+            count_blue = 0
+            if int(i+1) in red or int(i+1) in blue:
+                continue
+            for (x,y) in self.areas_dict[i]["pawns"]:
+                if canonical:
+                    if self.pawns[x][y] == -1:
+                        count_red +=1
+                    elif self.pawns[x][y] == 1:
+                        count_blue +=1
+                else:
+                    if self.pawns[x][y] == 1:
+                        count_red +=1
+                    elif self.pawns[x][y] == -1:
+                        count_blue +=1
+            if count_red >= math.ceil(len(self.areas_dict[i]["pawns"])/2.0):
+                p_areas_red.add(i+1)
+            elif count_blue >= math.ceil(len(self.areas_dict[i]["pawns"])/2.0):
+                p_areas_blue.add(i+1)
+        p_areas_red = list(p_areas_red)
+        p_areas_blue = list(p_areas_blue)
+        p_areas_red.extend(red)
+        p_areas_blue.extend(blue)
+        p_areas_red = list(sorted(set(p_areas_red)))
+        p_areas_blue = list(sorted(set(p_areas_blue)))
+        return p_areas_red, p_areas_blue
+    """
     def getAreas(self, player, player_areas, opponent):
         p_areas = set()
         canonical = False
@@ -157,7 +198,7 @@ class Board():
         p_areas.extend(curP)
         p_areas = list(sorted(set(p_areas)))
         return p_areas
-
+        """
 
     def __areaRec(self, area, end , player_areas, visited):
         visited.append(area)

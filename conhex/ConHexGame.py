@@ -51,6 +51,7 @@ class ConHexGame(Game):
         else:
             self.b_areas = np.copy(ret)
         """
+        """
         areas = np.copy(self.r_areas)
         opp = np.copy(self.b_areas)
         ret = b.getAreas(1, areas, opp)
@@ -59,8 +60,13 @@ class ConHexGame(Game):
         opp = np.copy(self.r_areas)
         ret = b.getAreas(-1, areas, opp)
         self.b_areas = np.copy(ret)
+        """
+        blue = np.copy(self.b_areas)
+        red = np.copy(self.r_areas)
+        gred, gblue = b.getAreas(red, blue)
 
-
+        self.r_areas = np.copy(gred)
+        self.b_areas = np.copy(gblue)
 
         return (b.pawns, -player)
 
