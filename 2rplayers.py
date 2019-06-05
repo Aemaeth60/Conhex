@@ -19,10 +19,10 @@ g = ConHexGame(17)
 #gp = GreedyOthelloPlayer(g).play
 #hp = HumanConHexPlayer(g).play
 #hp2 = HumanConHexPlayer(g).play
-#rp2 = RandomPlayer(g).play
-#rp = RandomPlayer(g).play
-gp =  GreedyConHexPlayer(g).play
-gp2 = GreedyConHexPlayer(g).play
+gp = RandomPlayer(g).play
+gp2 = RandomPlayer(g).play
+#gp =  GreedyConHexPlayer(g).play
+#gp2 = GreedyConHexPlayer(g).play
 # nnet players
 """
 n1 = NNet(g)

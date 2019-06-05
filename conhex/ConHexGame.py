@@ -14,6 +14,7 @@ class ConHexGame(Game):
 
     def getInitBoard(self):
         # return initial board (numpy board)
+        self.cleanAreas()
         b = Board(self.n)
         return np.array(b.pawns)
 
@@ -101,16 +102,12 @@ class ConHexGame(Game):
         print("Areas player blue : ", self.b_areas)
 
         if r_won:
-            self.cleanAreas()
             return player
         elif b_won:
-            self.cleanAreas()
             return -player
 
         if b.has_legal_moves():
             return 0
-
-        self.cleanAreas()
 
         return 0.000001
 
