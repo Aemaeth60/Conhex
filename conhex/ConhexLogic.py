@@ -7,6 +7,8 @@ On défini la logique suivante pour le board:
 """
 #from copy import deepcopy
 from .Data import *
+import math
+import numpy as np
 #import sys
 #sys.setrecursionlimit(10000)
 
@@ -124,19 +126,35 @@ class Board():
         self[x][y] = color
 
 
-    def getAreas(self, player, player_areas):
+    def getAreas(self, player, player_areas, opponent):
         p_areas = set()
+        canonical = False
+        curP = np.copy(player_areas)
+        oppP = np.copy(opponent)
+        a = [(x,y) for x,y in zip (range(self.n), range(self.n))]
+        for x,y in a:
+            if self.pawns[x][y] ==2:
+                break
+            else:
+                canonical = True
+                curP = np.copy(opponent)
+                oppP = np.copy(player_areas)
+                break
+
+
         for i in range(len(self.areas_dict)):
             count = 0
-            if int(i+1) in player_areas:
+            if int(i+1) in curP or int(i+1) in oppP:
                 continue
             for (x,y) in self.areas_dict[i]["pawns"]:
-                if self.pawns[x][y] == player:
+                if self.pawns[x][y] == player and canonical == False:
                     count += 1
-            if count >= len(self.areas_dict[i]["pawns"])/2:
+                elif self.pawns[x][y] == -player and canonical == True:
+                    count += 1
+            if count >= math.ceil(len(self.areas_dict[i]["pawns"])/2.0):
                 p_areas.add(i+1)
         p_areas = list(p_areas)
-        p_areas.extend(player_areas)
+        p_areas.extend(curP)
         p_areas = list(sorted(set(p_areas)))
         return p_areas
 
@@ -157,10 +175,10 @@ class Board():
     #list(set(board.areas_dict[int(area)-1]["neighbors"]) & set(player_areas))
 
 
-    def hasWon(self, player):
+    def hasWon(self, player, player_areas):
         start = []
         end = []
-        player_areas = self.getAreas(player, [])
+        #player_areas = self.getAreas(player, [], [])
         if player == 1:
             start = self.r_start_areas
             end = self.r_end_areas

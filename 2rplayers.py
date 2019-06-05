@@ -19,8 +19,10 @@ g = ConHexGame(17)
 #gp = GreedyOthelloPlayer(g).play
 #hp = HumanConHexPlayer(g).play
 #hp2 = HumanConHexPlayer(g).play
-rp2 = RandomPlayer(g).play
-rp = RandomPlayer(g).play
+#rp2 = RandomPlayer(g).play
+#rp = RandomPlayer(g).play
+gp =  GreedyConHexPlayer(g).play
+gp2 = GreedyConHexPlayer(g).play
 # nnet players
 """
 n1 = NNet(g)
@@ -36,5 +38,5 @@ n1p = lambda x: np.argmax(mcts1.getActionProb(x, temp=0))
 #mcts2 = MCTS(g, n2, args2)
 #n2p = lambda x: np.argmax(mcts2.getActionProb(x, temp=0))
 
-arena = Arena.Arena(rp2, rp, g, display=display)
+arena = Arena.Arena(gp, gp2, g, display=display)
 print(arena.playGames(2, verbose=True))

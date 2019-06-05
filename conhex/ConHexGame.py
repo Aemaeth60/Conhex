@@ -33,7 +33,11 @@ class ConHexGame(Game):
             return (board, -player)
         b = Board(self.n)
         b.pawns = np.copy(board)
-
+        move = (int(action/self.n), action%self.n)
+        #if(board[move[0]][move[1]] != 0):
+        #    return (board, -player)
+        b.execute_move(move, player)
+        """
         areas = []
         if(player == 1):
             areas = np.copy(self.r_areas)
@@ -46,14 +50,18 @@ class ConHexGame(Game):
             self.r_areas = np.copy(ret)
         else:
             self.b_areas = np.copy(ret)
+        """
+        areas = np.copy(self.r_areas)
+        opp = np.copy(self.b_areas)
+        ret = b.getAreas(1, areas, opp)
+        self.r_areas = np.copy(ret)
+        areas = np.copy(self.b_areas)
+        opp = np.copy(self.r_areas)
+        ret = b.getAreas(-1, areas, opp)
+        self.b_areas = np.copy(ret)
 
-        print("Areas player red : ", self.r_areas)
-        print("Areas player blue : ", self.b_areas)
 
-        move = (int(action/self.n), action%self.n)
-        #if(board[move[0]][move[1]] != 0):
-        #    return (board, -player)
-        b.execute_move(move, player)
+
         return (b.pawns, -player)
 
 
@@ -81,8 +89,10 @@ class ConHexGame(Game):
         b = Board(self.n)
         b.pawns = np.copy(board)
 
-        r_won = b.hasWon(player)
-        b_won = b.hasWon(-player)
+        r_won = b.hasWon(player, self.r_areas)
+        b_won = b.hasWon(-player, self.b_areas)
+        print("Areas player red : ", self.r_areas)
+        print("Areas player blue : ", self.b_areas)
 
         if r_won:
             self.cleanAreas()
@@ -128,9 +138,9 @@ class ConHexGame(Game):
         score = 0
 
         if player == 1:
-            score = len(b.getAreas(player))
+            score = len(self.r_areas)
         else:
-            score = len(b.getAreas(-player))
+            score = len(self.b_areas)
         return score
 
 

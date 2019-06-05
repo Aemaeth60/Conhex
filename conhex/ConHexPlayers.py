@@ -7,7 +7,6 @@ class RandomPlayer():
         self.game = game
 
     def play(self, board):
-        time.sleep(1)
         a = np.random.randint(self.game.getActionSize())
         valids = self.game.getValidMoves(board, 1)
         while valids[a]!=1:
