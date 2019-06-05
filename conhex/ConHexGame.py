@@ -98,8 +98,8 @@ class ConHexGame(Game):
 
         r_won = b.hasWon(player, self.r_areas)
         b_won = b.hasWon(-player, self.b_areas)
-        print("Areas player red : ", self.r_areas)
-        print("Areas player blue : ", self.b_areas)
+        #print("Areas player red : ", self.r_areas)
+        #print("Areas player blue : ", self.b_areas)
 
         if r_won:
             return player
