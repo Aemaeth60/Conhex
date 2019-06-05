@@ -113,7 +113,8 @@ class ConHexGame(Game):
 
     def getCanonicalForm(self, board, player):
         # return state if player==1, else return -state if player==-1
-        return player*board
+        return board
+        #return player*board
 
     def getSymmetries(self, board, pi):
         # mirror, rotational
