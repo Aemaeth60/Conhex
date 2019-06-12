@@ -102,8 +102,10 @@ class ConHexGame(Game):
         #print("Areas player blue : ", self.b_areas)
 
         if r_won:
+            print("R won")
             return player
         elif b_won:
+            print("B won")
             return -player
 
         if b.has_legal_moves():
