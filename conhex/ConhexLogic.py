@@ -120,7 +120,6 @@ class Board():
         (x, y) = move
         #assert self[x][y] == 0
         if(self[x][y] != 0):
-            print(self.get_legal_moves())
             print("Erreur aux coordonnées : ", x, y)
             raise AssertionError()
             
