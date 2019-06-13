@@ -46,10 +46,8 @@ class Arena():
                 print("Turn ", str(it), "Player ", str(curPlayer))
                 self.display(board)
             action = players[curPlayer+1](self.game.getCanonicalForm(board, curPlayer))
-            print("Action", action)
 
             valids = self.game.getValidMoves(self.game.getCanonicalForm(board, curPlayer),1)
-            print("valids", valids)
 
             if valids[action]==0:
                 print(action)
