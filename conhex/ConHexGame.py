@@ -118,6 +118,7 @@ class ConHexGame(Game):
 
     def getSymmetries(self, board, pi):
         # mirror, rotational
+        """
         assert(len(pi) == self.n**2+1)  # 1 for pass
         pi_board = np.reshape(pi[:-1], (self.n, self.n))
         l = []
@@ -131,6 +132,8 @@ class ConHexGame(Game):
                     newPi = np.fliplr(newPi)
                 l += [(newB, list(newPi.ravel()) + [pi[-1]])]
         return l
+        """
+        return [(board,pi)]
 
     def stringRepresentation(self, board):
         # 8x8 numpy array (canonical board)
