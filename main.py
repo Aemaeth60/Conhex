@@ -1,6 +1,6 @@
 from Coach import Coach
 from conhex.ConHexGame import ConHexGame as Game
-from conhex.tensorflow.NNet import NNetWrapper as nn
+from conhex.pytorch.NNet import NNetWrapper as nn
 from utils import *
 
 args = dotdict({
