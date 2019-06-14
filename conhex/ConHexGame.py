@@ -22,7 +22,7 @@ class ConHexGame(Game):
 
     def getBoardSize(self):
         # (a,b) tuple
-        return (self.width, self.height)
+        return (self.height, self.width)
 
     def getActionSize(self):
         # return number of actions
