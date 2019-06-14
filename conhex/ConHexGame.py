@@ -7,34 +7,36 @@ import numpy as np
 
 class ConHexGame(Game):
 
-    def __init__(self, n):
+    def __init__(self, n, width, height):
         self.n = n
+        self.width = width
+        self.height = height
         self.r_areas = []
         self.b_areas = []
 
     def getInitBoard(self):
         # return initial board (numpy board)
         self.cleanAreas()
-        b = Board(self.n)
-        return np.array(b.pawns)
+        b = Board(self.n, self.width, self.height)
+        return np.array(b.pieces)
 
     def getBoardSize(self):
         # (a,b) tuple
-        return (self.n, self.n)
+        return (self.width, self.height)
 
     def getActionSize(self):
         # return number of actions
         #return sum(len(x) for x in Board.playable) +1
-        return self.n*self.n + 1
+        return self.width*self.height + 1
 
     def getNextState(self, board, player, action):
         # if player takes action on board, return next (board,player)
         # action must be a valid move
-        if action == self.n*self.n:
+        if action == self.width*self.height:
             return (board, -player)
-        b = Board(self.n)
-        b.pawns = np.copy(board)
-        move = (int(action/self.n), action%self.n)
+        b = Board(self.n, self.width, self.height)
+        b.pieces = np.copy(board)
+        move = (int(action/self.width), action%self.width)
         #if(board[move[0]][move[1]] != 0):
         #    return (board, -player)
         b.execute_move(move, player)
@@ -69,20 +71,22 @@ class ConHexGame(Game):
         self.r_areas = np.copy(gred)
         self.b_areas = np.copy(gblue)
 
-        return (b.pawns, -player)
+        return (b.pieces, -player)
 
 
     def getValidMoves(self, board, player):
         # return a fixed size binary vector
         valids = [0]*self.getActionSize()
-        b = Board(self.n)
-        b.pawns = np.copy(board)
+        b = Board(self.n, self.width, self.height)
+        b.pieces = np.copy(board)
+        #print(board)
         legalMoves =  b.get_legal_moves()
+        #print(legalMoves)
         if len(legalMoves)==0:
             valids[-1]=1
             return np.array(valids)
         for x, y in legalMoves:
-            valids[self.n*x+y]=1
+            valids[self.width*x+y]=1
         return np.array(valids)
 
     def cleanAreas(self):
@@ -93,8 +97,8 @@ class ConHexGame(Game):
     def getGameEnded(self, board, player):
         # return 0 if not ended, 1 if player 1 won, -1 if player 1 lost
         # player = 1
-        b = Board(self.n)
-        b.pawns = np.copy(board)
+        b = Board(self.n, self.width, self.height)
+        b.pieces = np.copy(board)
 
         r_won = b.hasWon(player, self.r_areas)
         b_won = b.hasWon(-player, self.b_areas)
@@ -140,8 +144,8 @@ class ConHexGame(Game):
         return board.tostring()
 
     def getScore(self, board, player):
-        b = Board(self.n)
-        b.panws = np.copy(board)
+        b = Board(self.n, self.width, self.height)
+        b.pieces = np.copy(board)
         score = 0
 
         if player == 1:
@@ -153,25 +157,25 @@ class ConHexGame(Game):
 
 def display(board):
     #board.debug()
-    n = board.shape[0]
+    #n = board.shape[0]
     #b = Board(n)
     #b.pawns = np.copy(board)
 
 
     #print("Areas player red : ", b.r_areas)
     #print("Areas player blue : ", b.b_areas)
-    for y in range(n):
+    for y in range(23):
         print (y,"|",end="")
     print("")
     print(" -----------------------")
-    for y in range(n):
+    for y in range(3):
         print(y, "|",end="")    # print the row #
-        for x in range(n):
+        for x in range(23):
             piece = board[y][x]    # get the piece to print
             if piece == -1: print("b ",end="")
             elif piece == 1: print("r ",end="")
             else:
-                if x==n:
+                if x==23:
                     print("-",end="")
                 else:
                     print("- ",end="")

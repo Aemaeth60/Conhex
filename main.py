@@ -21,7 +21,7 @@ args = dotdict({
 })
 
 if __name__=="__main__":
-    g = Game(17)  #n est la taille du plateau
+    g = Game(17, 23, 3)  #n est la taille du plateau
     nnet = nn(g)
 
     if args.load_model:
