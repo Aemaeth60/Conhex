@@ -9,9 +9,9 @@ class ConHexGame(Game):
 
     def __init__(self, n):
         self.n = n
-        #self.r_areas = []
-        #self.b_areas = []
-        #self.prev_canonical = False
+        self.r_areas = []
+        self.b_areas = []
+        self.prev_canonical = False
 
     def getInitBoard(self):
         # return initial board (numpy board)
@@ -34,13 +34,11 @@ class ConHexGame(Game):
         if action == self.n*self.n:
             return (board, -player)
         b = Board(self.n)
-        """
         if( len(b.get_legal_moves()) == 69):
             if player == 1:
                 self.prev_canonical = False
             else:
                 prev_canonical = True
-        """
         b.pawns = np.copy(board)
         move = (int(action/self.n), action%self.n)
         #if(board[move[0]][move[1]] != 0):
@@ -70,7 +68,6 @@ class ConHexGame(Game):
         ret = b.getAreas(-1, areas, opp)
         self.b_areas = np.copy(ret)
         """
-        """
         blue = np.copy(self.b_areas)
         red = np.copy(self.r_areas)
         gred, gblue, canonical = b.getAreas(red, blue, self.prev_canonical)
@@ -78,7 +75,6 @@ class ConHexGame(Game):
         self.prev_canonical = canonical
         self.r_areas = np.copy(gred)
         self.b_areas = np.copy(gblue)
-        """
 
         return (b.pawns, -player)
 
@@ -97,9 +93,8 @@ class ConHexGame(Game):
         return np.array(valids)
 
     def cleanAreas(self):
-        pass
-        #self.r_areas = []
-        #self.b_areas = []
+        self.r_areas = []
+        self.b_areas = []
 
 
     def getGameEnded(self, board, player):
@@ -107,10 +102,8 @@ class ConHexGame(Game):
         # player = 1
         b = Board(self.n)
         b.pawns = np.copy(board)
-        #r_won = b.hasWon(1, self.r_areas)
-        #b_won = b.hasWon(-1, self.b_areas)
-        r_won = b.hasWon(player, [])
-        b_won = b.hasWon(-player, [])
+        r_won = b.hasWon(1, self.r_areas)
+        b_won = b.hasWon(-1, self.b_areas)
 
         if r_won:
             return player

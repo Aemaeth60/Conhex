@@ -127,9 +127,9 @@ class Board():
         self[x][y] = color
 
 
-    def getAreas(self, player):
-        p_areas = set()
-        """
+    def getAreas(self, red, blue, prev_canonical):
+        p_areas_red = set()
+        p_areas_blue = set()
         temp_b = []
         temp_r = []
         canonical = False
@@ -147,14 +147,13 @@ class Board():
                 red = np.copy(temp_b)
                 blue = np.copy(temp_r)
                 prev_canonical = canonical
-        """
 
 
         for i in range(len(self.areas_dict)):
-            count = 0
-
-            #if int(i+1) in red or int(i+1) in blue:
-            #    continue
+            count_red = 0
+            count_blue = 0
+            if int(i+1) in red or int(i+1) in blue:
+                continue
             for (x,y) in self.areas_dict[i]["pawns"]:
                 """
                 if canonical:
@@ -163,13 +162,21 @@ class Board():
                     elif self.pawns[x][y] == 1:
                         count_blue +=1
                 """
-                if self.pawns[x][y] == player:
-                    count += 1
-            if count >= math.ceil(len(self.areas_dict[i]["pawns"])/2.0):
-                p_areas.add(i+1)
-        p_areas = list(p_areas)
-        p_areas = list(sorted(set(p_areas)))
-        return p_areas
+                if self.pawns[x][y] == 1:
+                    count_red +=1
+                elif self.pawns[x][y] == -1:
+                    count_blue +=1
+            if count_red >= math.ceil(len(self.areas_dict[i]["pawns"])/2.0):
+                p_areas_red.add(i+1)
+            elif count_blue >= math.ceil(len(self.areas_dict[i]["pawns"])/2.0):
+                p_areas_blue.add(i+1)
+        p_areas_red = list(p_areas_red)
+        p_areas_blue = list(p_areas_blue)
+        p_areas_red.extend(red)
+        p_areas_blue.extend(blue)
+        p_areas_red = list(sorted(set(p_areas_red)))
+        p_areas_blue = list(sorted(set(p_areas_blue)))
+        return p_areas_red, p_areas_blue, prev_canonical
     """
     def getAreas(self, player, player_areas, opponent):
         p_areas = set()
@@ -223,7 +230,7 @@ class Board():
     def hasWon(self, player, player_areas):
         start = []
         end = []
-        player_areas = self.getAreas(player)
+        #player_areas = self.getAreas(player, [], [])
         if player == 1:
             start = self.r_start_areas
             end = self.r_end_areas
