@@ -109,13 +109,13 @@ class ConHexGame(Game):
         b.pawns = np.copy(board)
         #r_won = b.hasWon(1, self.r_areas)
         #b_won = b.hasWon(-1, self.b_areas)
-        r_won = b.hasWon(1, [])
-        b_won = b.hasWon(-1, [])
+        r_won = b.hasWon(player, [])
+        b_won = b.hasWon(-player, [])
 
         if r_won:
-            return 1
+            return player
         elif b_won:
-            return -1
+            return -player
 
         '''
         if b.has_legal_moves():
