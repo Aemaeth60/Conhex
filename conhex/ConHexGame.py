@@ -102,8 +102,8 @@ class ConHexGame(Game):
         # player = 1
         b = Board(self.n)
         b.pawns = np.copy(board)
-        r_won = b.hasWon(1, self.r_areas)
-        b_won = b.hasWon(-1, self.b_areas)
+        r_won = b.hasWon(player, self.r_areas)
+        b_won = b.hasWon(-player, self.b_areas)
 
         if r_won:
             return 1
