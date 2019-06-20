@@ -25,7 +25,7 @@ class ConHexGame(Game):
     def getActionSize(self):
         # return number of actions
         #return sum(len(x) for x in Board.playable) +1
-        return self.n*self.n + 1
+        return self.n*self.n# + 1
 
     def getNextState(self, board, player, action):
         # if player takes action on board, return next (board,player)
@@ -98,18 +98,18 @@ class ConHexGame(Game):
 
         r_won = b.hasWon(player, self.r_areas)
         b_won = b.hasWon(-player, self.b_areas)
-        #print("Areas player red : ", self.r_areas)
-        #print("Areas player blue : ", self.b_areas)
 
         if r_won:
             return player
         elif b_won:
             return -player
 
+        '''
         if b.has_legal_moves():
             return 0
+        '''
 
-        return 0.000001
+        return 0
 
     def getCanonicalForm(self, board, player):
         # return state if player==1, else return -state if player==-1
