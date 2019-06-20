@@ -106,9 +106,9 @@ class ConHexGame(Game):
         b_won = b.hasWon(-1, self.b_areas)
 
         if r_won:
-            return player
+            return 1
         elif b_won:
-            return -player
+            return -1
 
         '''
         if b.has_legal_moves():
