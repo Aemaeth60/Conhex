@@ -34,7 +34,7 @@ class ConHexGame(Game):
         if action == self.n*self.n:
             return (board, -player)
         b = Board(self.n)
-        if( len(b.get_legal_moves) == 69):
+        if( len(b.get_legal_moves()) == 69):
             if player == 1:
                 self.prev_canonical = False
             else:
