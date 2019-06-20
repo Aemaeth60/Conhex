@@ -99,8 +99,6 @@ class ConHexGame(Game):
         r_won = b.hasWon(1, self.r_areas)
         b_won = b.hasWon(-1, self.b_areas)
 
-        print("victoire:", r_won, b_won, player)
-
         if r_won:
             return player
         elif b_won:
