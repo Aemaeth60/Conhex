@@ -96,8 +96,10 @@ class ConHexGame(Game):
         b = Board(self.n)
         b.pawns = np.copy(board)
 
-        r_won = b.hasWon(player, self.r_areas)
-        b_won = b.hasWon(-player, self.b_areas)
+        r_won = b.hasWon(1, self.r_areas)
+        b_won = b.hasWon(-1, self.b_areas)
+
+        print("victoire:", r_won, b_won, player)
 
         if r_won:
             return player
@@ -113,8 +115,8 @@ class ConHexGame(Game):
 
     def getCanonicalForm(self, board, player):
         # return state if player==1, else return -state if player==-1
-        #return board
-        return player*board
+        return board
+        #return player*board
 
     def getSymmetries(self, board, pi):
         # mirror, rotational
