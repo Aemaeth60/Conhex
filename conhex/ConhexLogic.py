@@ -127,9 +127,11 @@ class Board():
         self[x][y] = color
 
 
-    def getAreas(self, red, blue):
+    def getAreas(self, red, blue, prev_canonical):
         p_areas_red = set()
         p_areas_blue = set()
+        temp_b = []
+        temp_r = []
         canonical = False
         a = [(x,y) for x,y in zip (range(self.n), range(self.n))]
         for x,y in a:
@@ -139,6 +141,13 @@ class Board():
                 canonical = True
                 break
 
+        if(canonical != prev_canonical):
+                temp_b = np.copy(blue)
+                temp_r = np.copy(red)
+                red = np.copy(temp_b)
+                blue = np.copy(temp_r)
+                prev_canonical = canonical
+
 
         for i in range(len(self.areas_dict)):
             count_red = 0
@@ -146,16 +155,17 @@ class Board():
             if int(i+1) in red or int(i+1) in blue:
                 continue
             for (x,y) in self.areas_dict[i]["pawns"]:
+                """
                 if canonical:
                     if self.pawns[x][y] == -1:
                         count_red +=1
                     elif self.pawns[x][y] == 1:
                         count_blue +=1
-                else:
-                    if self.pawns[x][y] == 1:
-                        count_red +=1
-                    elif self.pawns[x][y] == -1:
-                        count_blue +=1
+                """
+                if self.pawns[x][y] == 1:
+                    count_red +=1
+                elif self.pawns[x][y] == -1:
+                    count_blue +=1
             if count_red >= math.ceil(len(self.areas_dict[i]["pawns"])/2.0):
                 p_areas_red.add(i+1)
             elif count_blue >= math.ceil(len(self.areas_dict[i]["pawns"])/2.0):
@@ -166,7 +176,7 @@ class Board():
         p_areas_blue.extend(blue)
         p_areas_red = list(sorted(set(p_areas_red)))
         p_areas_blue = list(sorted(set(p_areas_blue)))
-        return p_areas_red, p_areas_blue
+        return p_areas_red, p_areas_blue, prev_canonical
     """
     def getAreas(self, player, player_areas, opponent):
         p_areas = set()
