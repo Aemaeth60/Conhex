@@ -165,6 +165,7 @@ class Board():
 
         p_areas_red = set()
         p_areas_blue = set()
+        """
         canonical = False
         a = [(x,y) for x,y in zip (range(self.n), range(self.n))]
         for x,y in a:
@@ -173,6 +174,7 @@ class Board():
             elif self.pawns[x][y] == -2:
                 canonical = True
                 break
+        """
 
 
         for i in range(len(self.areas_dict)):
@@ -181,7 +183,7 @@ class Board():
             if int(i+1) in red or int(i+1) in blue:
                 continue
             for (x,y) in self.areas_dict[i]["pawns"]:
-                if canonical:
+                if False:
                     if self.pawns[x][y] == -1:
                         count_red +=1
                     elif self.pawns[x][y] == 1:
