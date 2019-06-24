@@ -43,7 +43,7 @@ class Arena():
                 assert(self.display)
                 print("Areas player red : ", self.game.r_areas)
                 print("Areas player blue : ", self.game.b_areas)
-                #print("Turn ", str(it), "Player ", str(curPlayer))
+                print("Turn ", str(it), "Player ", str(curPlayer))
                 self.display(board)
             action = players[curPlayer+1](self.game.getCanonicalForm(board, curPlayer))
 
