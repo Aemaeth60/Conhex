@@ -47,7 +47,9 @@ class Arena():
                 self.display(board)
             action = players[curPlayer+1](self.game.getCanonicalForm(board, curPlayer))
 
+
             valids = self.game.getValidMoves(self.game.getCanonicalForm(board, curPlayer),1)
+            print(valids)
 
             if valids[action]==0:
                 print(action)
@@ -55,8 +57,6 @@ class Arena():
             board, curPlayer = self.game.getNextState(board, curPlayer, action)
         if verbose:
             assert(self.display)
-            print("Areas player red : ", self.game.r_areas)
-            print("Areas player blue : ", self.game.b_areas)
             print("Game over: Turn ", str(it), "Result ", str(self.game.getGameEnded(board, 1)))
             self.display(board)
         return self.game.getGameEnded(board, 1)

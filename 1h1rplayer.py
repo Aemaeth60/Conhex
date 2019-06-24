@@ -12,7 +12,7 @@ use this script to play any two agents against each other, or play manually with
 any agent.
 """
 
-g = ConHexGame(17)
+g = ConHexGame(17, 23, 3)
 
 # all players
 #rp = RandomPlayer(g).play

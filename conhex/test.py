@@ -4,13 +4,6 @@ from ConhexLogic import Board
 
 i = 0
 b = Board(17)
-
-print(b.hasWon(1, [1  ,3,  9, 10, 15, 16, 20, 21, 22, 23, 25, 31, 32, 33, 34, 38, 39]))
-print(b.hasWon(-1, [1  ,3,  9, 10, 15, 16, 20, 21, 22, 23, 25, 31, 32, 33, 34, 38, 39]))
-print(b.hasWon(1, [5,  8, 14, 17, 18, 26, 27, 28, 29, 30 ,35, 36, 40, 41]))
-print(b.hasWon(-1, [5,  8, 14, 17, 18, 26, 27, 28, 29, 30 ,35, 36, 40, 41]))
-
-"""
 t = datetime.now()
 while i < len(b.areas_dict):
     while not(keyboard.is_pressed('q')) or (datetime.now()-t).seconds < 1:
@@ -39,4 +32,3 @@ while i < len(b.areas_dict):
 
     print("   -----------------------")
     i +=1
-"""
