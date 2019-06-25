@@ -58,6 +58,8 @@ circles = []
 circlesFake = []
 totalCircles = []
 
+listPolygone = []
+
 liste = [[]for x in range(41)]
 
 
@@ -150,13 +152,27 @@ def drawBoard():
     
     for i in range(len(pawns_places)):
     	for j in pawns_places[i]:
+    		liste[j-1].append([posTotal[i][0],posTotal[i][1]])
     		
-    		liste[j-1].append(posTotal[i][0])
-    		liste[j-1].append(posTotal[i][1])
 
-    for i in range(len(liste)):
-    	print(liste[i])
-    pygame.draw.polygon(screen, colorNode, [pos[0],posFake[0],pos[2],pos[9],posFake[4]],1)
+    print(liste[0])
+    #	for j in liste[i]:
+    #		print(j)
+    #		listePoint.append(j)
+
+    listPolygone.append(pygame.draw.polygon(screen, colorNode, [posTotal[0],posTotal[1],posTotal[6],posTotal[14],posTotal[13]],1))  #1
+    listPolygone.append(pygame.draw.polygon(screen, colorNode, [posTotal[1],posTotal[2],posTotal[8],posTotal[7],posTotal[6]],1))
+    listPolygone.append(pygame.draw.polygon(screen, colorNode, [posTotal[2],posTotal[3],posTotal[10],posTotal[9],posTotal[8]],1))
+    listPolygone.append(pygame.draw.polygon(screen, colorNode, [posTotal[3],posTotal[4],posTotal[12],posTotal[11],posTotal[10]],1))
+    listPolygone.append(pygame.draw.polygon(screen, colorNode, [posTotal[4],posTotal[5],posTotal[16],posTotal[15],posTotal[12]],1)) #5
+    listPolygone.append(pygame.draw.polygon(screen, colorNode, [posTotal[13],posTotal[14],posTotal[22],posTotal[30],posTotal[29]],1)) #6
+    listPolygone.append(pygame.draw.polygon(screen, colorNode, [posTotal[14],posTotal[6],posTotal[7],posTotal[17],posTotal[23],posTotal[22]],1))
+    listPolygone.append(pygame.draw.polygon(screen, colorNode, [posTotal[7],posTotal[8],posTotal[9],posTotal[19],posTotal[18],posTotal[17]],1))
+    listPolygone.append(pygame.draw.polygon(screen, colorNode, [posTotal[9],posTotal[10],posTotal[11],posTotal[21],posTotal[20],posTotal[19]],1)) #9
+    listPolygone.append(pygame.draw.polygon(screen, colorNode, [posTotal[11],posTotal[12],posTotal[15],posTotal[25],posTotal[24],posTotal[21]],1))
+    listPolygone.append(pygame.draw.polygon(screen, colorNode, [posTotal[14],posTotal[6],posTotal[7],posTotal[17],posTotal[23],posTotal[22]],1))
+    #pygame.draw.polygon(screen, colorNode, [pos[0],posFake[0],pos[2],pos[9],posFake[4]],1)
+
 
     #for i in range(len(pawns_places)):
      #   for j in pawns_places[i]:
