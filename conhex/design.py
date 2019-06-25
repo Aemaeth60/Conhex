@@ -155,7 +155,6 @@ def drawBoard():
     		liste[j-1].append([posTotal[i][0],posTotal[i][1]])
     		
 
-    print(liste[0])
     #	for j in liste[i]:
     #		print(j)
     #		listePoint.append(j)
@@ -170,7 +169,44 @@ def drawBoard():
     listPolygone.append(pygame.draw.polygon(screen, colorNode, [posTotal[7],posTotal[8],posTotal[9],posTotal[19],posTotal[18],posTotal[17]],1))
     listPolygone.append(pygame.draw.polygon(screen, colorNode, [posTotal[9],posTotal[10],posTotal[11],posTotal[21],posTotal[20],posTotal[19]],1)) #9
     listPolygone.append(pygame.draw.polygon(screen, colorNode, [posTotal[11],posTotal[12],posTotal[15],posTotal[25],posTotal[24],posTotal[21]],1))
-    listPolygone.append(pygame.draw.polygon(screen, colorNode, [posTotal[14],posTotal[6],posTotal[7],posTotal[17],posTotal[23],posTotal[22]],1))
+    listPolygone.append(pygame.draw.polygon(screen, colorNode, [posTotal[15],posTotal[16],posTotal[36],posTotal[35],posTotal[25]],1)) #11
+    listPolygone.append(pygame.draw.polygon(screen, colorNode, [posTotal[22],posTotal[23],posTotal[31],posTotal[39],posTotal[38],posTotal[30]],1))
+    listPolygone.append(pygame.draw.polygon(screen, colorNode, [posTotal[17],posTotal[18],posTotal[26],posTotal[32],posTotal[31],posTotal[23]],1))
+    listPolygone.append(pygame.draw.polygon(screen, colorNode, [posTotal[18],posTotal[19],posTotal[20],posTotal[28],posTotal[27],posTotal[26]],1))
+    listPolygone.append(pygame.draw.polygon(screen, colorNode, [posTotal[20],posTotal[21],posTotal[24],posTotal[34],posTotal[33],posTotal[28]],1)) #15
+    listPolygone.append(pygame.draw.polygon(screen, colorNode, [posTotal[24],posTotal[25],posTotal[35],posTotal[46],posTotal[45],posTotal[34]],1))
+    listPolygone.append(pygame.draw.polygon(screen, colorNode, [posTotal[29],posTotal[30],posTotal[38],posTotal[49],posTotal[48]],1)) #17
+    listPolygone.append(pygame.draw.polygon(screen, colorNode, [posTotal[38],posTotal[39],posTotal[50],posTotal[60],posTotal[59],posTotal[49]],1))
+    listPolygone.append(pygame.draw.polygon(screen, colorNode, [posTotal[31],posTotal[32],posTotal[40],posTotal[51],posTotal[50],posTotal[39]],1))
+    listPolygone.append(pygame.draw.polygon(screen, colorNode, [posTotal[26],posTotal[27],posTotal[37],posTotal[41],posTotal[40],posTotal[32]],1)) #20
+    listPolygone.append(pygame.draw.polygon(screen, colorNode, [posTotal[27],posTotal[28],posTotal[33],posTotal[44],posTotal[43],posTotal[37]],1))
+    listPolygone.append(pygame.draw.polygon(screen, colorNode, [posTotal[33],posTotal[34],posTotal[45],posTotal[53],posTotal[52],posTotal[44]],1))
+    listPolygone.append(pygame.draw.polygon(screen, colorNode, [posTotal[45],posTotal[46],posTotal[54],posTotal[62],posTotal[61],posTotal[53]],1))
+    listPolygone.append(pygame.draw.polygon(screen, colorNode, [posTotal[35],posTotal[36],posTotal[55],posTotal[54],posTotal[46]],1)) #24
+    listPolygone.append(pygame.draw.polygon(screen, colorNode, [posTotal[43],posTotal[47],posTotal[41],posTotal[37]],1)) #25
+    listPolygone.append(pygame.draw.polygon(screen, colorNode, [posTotal[40],posTotal[41],posTotal[47],posTotal[57],posTotal[56],posTotal[51]],1))
+    listPolygone.append(pygame.draw.polygon(screen, colorNode, [posTotal[43],posTotal[44],posTotal[52],posTotal[58],posTotal[57],posTotal[47]],1)) #27
+    listPolygone.append(pygame.draw.polygon(screen, colorNode, [posTotal[48],posTotal[49],posTotal[59],posTotal[69],posTotal[68]],1))
+    listPolygone.append(pygame.draw.polygon(screen, colorNode, [posTotal[59],posTotal[60],posTotal[63],posTotal[73],posTotal[72],posTotal[69]],1))
+    listPolygone.append(pygame.draw.polygon(screen, colorNode, [posTotal[50],posTotal[51],posTotal[56],posTotal[64],posTotal[63],posTotal[60]],1)) #30
+    listPolygone.append(pygame.draw.polygon(screen, colorNode, [posTotal[63],posTotal[64],posTotal[65],posTotal[75],posTotal[74],posTotal[73]],1))
+    listPolygone.append(pygame.draw.polygon(screen, colorNode, [posTotal[56],posTotal[57],posTotal[58],posTotal[66],posTotal[65],posTotal[64]],1))#32
+
+
+    listPolygone.append(pygame.draw.polygon(screen, colorNode, [posTotal[65],posTotal[66],posTotal[67],posTotal[77],posTotal[76],posTotal[75]],1)) #33
+
+    listPolygone.append(pygame.draw.polygon(screen, colorNode, [posTotal[52],posTotal[53],posTotal[61],posTotal[67],posTotal[66],posTotal[58]],1))
+    listPolygone.append(pygame.draw.polygon(screen, colorNode, [posTotal[61],posTotal[62],posTotal[70],posTotal[78],posTotal[77],posTotal[67]],1))
+    listPolygone.append(pygame.draw.polygon(screen, colorNode, [posTotal[54],posTotal[55],posTotal[71],posTotal[70],posTotal[62]],1)) #36
+
+    listPolygone.append(pygame.draw.polygon(screen, colorNode, [posTotal[68],posTotal[69],posTotal[72],posTotal[80],posTotal[79]],1))
+    listPolygone.append(pygame.draw.polygon(screen, colorNode, [posTotal[72],posTotal[73],posTotal[74],posTotal[81],posTotal[80]],1))
+    listPolygone.append(pygame.draw.polygon(screen, colorNode, [posTotal[74],posTotal[75],posTotal[76],posTotal[82],posTotal[81]],1))
+    listPolygone.append(pygame.draw.polygon(screen, colorNode, [posTotal[76],posTotal[77],posTotal[78],posTotal[83],posTotal[82]],1)) #40
+
+    listPolygone.append(pygame.draw.polygon(screen, colorNode, [posTotal[70],posTotal[71],posTotal[84],posTotal[83],posTotal[78]],1))
+
+
     #pygame.draw.polygon(screen, colorNode, [pos[0],posFake[0],pos[2],pos[9],posFake[4]],1)
 
 
