@@ -58,7 +58,7 @@ circles = []
 circlesFake = []
 totalCircles = []
 
-liste = [[]]*41
+liste = [[]for x in range(41)]
 
 
 pawns_places = [
@@ -147,21 +147,15 @@ def drawBoard():
     for i in range(len(posFake)):
         circlesFake.append(pygame.draw.circle(screen,colorNodeEmpty,posFake[i],sizeNode))
 
-    print(len(posTotal))
     
     for i in range(len(pawns_places)):
     	for j in pawns_places[i]:
-    		print(pawns_places[i])
+    		
     		liste[j-1].append(posTotal[i][0])
     		liste[j-1].append(posTotal[i][1])
-    
-    print(len(liste[1]))
-    print(len(liste[40]))
 
-    print(liste[1])
-    print(liste[40])
-
-
+    for i in range(len(liste)):
+    	print(liste[i])
     pygame.draw.polygon(screen, colorNode, [pos[0],posFake[0],pos[2],pos[9],posFake[4]],1)
 
     #for i in range(len(pawns_places)):
