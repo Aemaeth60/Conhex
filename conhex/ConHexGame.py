@@ -39,6 +39,7 @@ class ConHexGame(Game):
         move = (int(action/self.width), action%self.width)
         #if(board[move[0]][move[1]] != 0):
         #    return (board, -player)
+
         b.execute_move(move, player)
         """
         areas = []
