@@ -1,6 +1,7 @@
 import pygame,math
 from pygame.locals import *
 
+pygame.init()
 colorBoard = (255,255,255)
 colorNode = (0,0,0)
 colorLine = (0,0,1)
@@ -8,7 +9,8 @@ sizeNode = 8
 sizeLine = 1
 blue = (0,0,255)
 red = (255,0,0)
-
+text = 'Your turn'
+myfont = pygame.font.SysFont('Comic Sans MS', 30)
 colorNodeEmpty = (0,255,0)
 
 pos = [(10,10),(490,10),  #480/16 =30
@@ -148,7 +150,19 @@ def getColor(c):
 	else:
 		return red
 
+def getTextFromPlayer(curPlayer):
+	if curPlayer==1:
+		return "Your turn, player 1"
+	return "Your turn, player -1"
+
 def drawBoard():
+
+    pygame.display.set_caption("Cohnex")
+    screen.fill(colorBoard)
+    
+    
+    textsurface = myfont.render(text, False, getColorFromPlayer(1))
+    screen.blit(textsurface,(500,100))
     for i in range(len(posTotal)):
         totalCircles.append(pygame.draw.circle(screen,colorBoard,posTotal[i],sizeNode))
 

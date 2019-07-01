@@ -1,6 +1,10 @@
 import numpy as np
 from pytorch_classification.utils import Bar, AverageMeter
 import time
+from conhex import design
+import pygame
+
+
 
 class Arena():
     """
@@ -22,6 +26,7 @@ class Arena():
         self.player2 = player2
         self.game = game
         self.display = display
+        design.drawBoard()
 
     def playGame(self, verbose=False):
         """
@@ -38,6 +43,13 @@ class Arena():
         board = self.game.getInitBoard()
         it = 0
         while self.game.getGameEnded(board, curPlayer)==0:
+            textSurfaceEmpty = design.myfont.render(design.getTextFromPlayer(-curPlayer),False,design.colorBoard)
+            design.screen.blit(textSurfaceEmpty,(500,100))
+
+            text = design.getTextFromPlayer(curPlayer)
+            textsurface = design.myfont.render(text, False, design.getColorFromPlayer(curPlayer))
+            design.screen.blit(textsurface,(500,100))
+            pygame.display.update()
             it+=1
             if verbose:
                 assert(self.display)
