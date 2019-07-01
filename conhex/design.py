@@ -100,10 +100,10 @@ def main():
 
     screen.fill(colorBoard)
     screen.blit(textsurface,(500,100))
-    drawBoard()
+    #drawBoard()
 
-    
     # define a variable to control the main loop
+    """
     running = True
     # main loop
     while running:
@@ -130,6 +130,42 @@ def main():
                     	#pygame.draw.circle(screen,blue,(i[0],i[1]),sizeNode
                 print(pygame.mouse.get_pos())
                 pygame.display.update()
+
+    """
+
+def getCirle():
+    running = True
+    # main loop
+    cir = 0
+    while running:
+        pos = pygame.mouse.get_pos()
+        # event handling, gets all event from the event queue
+        for event in pygame.event.get():
+            # only do something if the event is of type QUIT
+            if event.type == pygame.QUIT:
+                # change the value to False, to exit the main loop
+                running = False
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                for i in range(len(circles)):  #i[0] = x && i[1] = y
+                    absx = abs(circles[i][0]-pos[0])
+                    absy = abs(circles[i][1]-pos[1])
+                    if absx < 12 and absy <12:
+                        """
+                        print(curPlayer)
+                        screen.fill(getColorFromPlayer(curPlayer),i)
+                        text = 'Your turn player ' + str(curPlayer)
+                        textsurface = myfont.render(text, False, getColorFromPlayer(-curPlayer))
+    
+                        screen.blit(textsurface,(500,100))
+                        curPlayer =  switchPlayer(curPlayer)
+                        """
+                        cir = i
+                        running = False
+
+                        #pygame.draw.circle(screen,blue,(i[0],i[1]),sizeNode
+                print(pygame.mouse.get_pos())
+                pygame.display.update()
+    return cir
 
 def getColorFromPlayer(curPlayer):
 	if curPlayer==-1:
