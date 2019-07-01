@@ -57,6 +57,12 @@ class Arena():
                 print("Areas player blue : ", self.game.b_areas)
                 print("Turn ", str(it), "Player ", str(curPlayer))
                 self.display(board)
+            for i in self.game.r_areas:
+            	design.listPolygone[i-1] = pygame.draw.polygon(design.screen, design.red, design.tabPosPoly[i-1])
+            	pygame.display.update()
+            for i in self.game.b_areas:
+            	design.listPolygone[i-1] = pygame.draw.polygon(design.screen, design.blue, design.tabPosPoly[i-1])
+            	pygame.display.update()
             action = players[curPlayer+1](self.game.getCanonicalForm(board, curPlayer))
 
 
