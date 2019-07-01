@@ -176,7 +176,7 @@ def main():
 
     """
 
-def getCirle():
+def getCircle():
     running = True
     # main loop
     cir = 0

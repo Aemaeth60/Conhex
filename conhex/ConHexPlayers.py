@@ -38,10 +38,13 @@ class HumanConHexPlayer():
         return a
 
 class GHumanConhexPlayer():
+    trick = 0
     def __init__(self, game):
         self.game = game
 
     def play(self, board):
+        return 0
+        """
         # display(board)
         valid = self.game.getValidMoves(board, 1)
         """
@@ -60,6 +63,7 @@ class GHumanConhexPlayer():
                 print('Invalid')
 
         return a
+        """
 
 
 class GreedyConHexPlayer():

@@ -2,6 +2,7 @@ import numpy as np
 from pytorch_classification.utils import Bar, AverageMeter
 import time
 from conhex import design
+import conhex.ConHexPlayers
 import pygame
 
 
@@ -63,8 +64,15 @@ class Arena():
             for i in self.game.b_areas:
             	design.listPolygone[i-1] = pygame.draw.polygon(design.screen, design.blue, design.tabPosPoly[i-1])
             	pygame.display.update()
-            action = players[curPlayer+1](self.game.getCanonicalForm(board, curPlayer))
 
+            if hasattr(players[curPlayer+1], 'trick'):
+                action = design.getCircle()
+                print("oui")
+            else:
+                action = players[curPlayer+1](self.game.getCanonicalForm(board, curPlayer))
+                
+            action = design.getCircle()
+            design.screen.fill(design.getColorFromPlayer(curPlayer),design.circles[action])
 
             valids = self.game.getValidMoves(self.game.getCanonicalForm(board, curPlayer),1)
 
