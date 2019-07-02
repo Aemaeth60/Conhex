@@ -71,7 +71,8 @@ class Arena():
             else:
                 action = players[curPlayer+1](self.game.getCanonicalForm(board, curPlayer))
                 
-            action = design.getCircle()
+            #action = design.getCircle()
+            action = players[curPlayer+1](self.game.getCanonicalForm(board, curPlayer))
             design.screen.fill(design.getColorFromPlayer(curPlayer),design.circles[action])
 
             valids = self.game.getValidMoves(self.game.getCanonicalForm(board, curPlayer),1)

@@ -157,7 +157,7 @@ class Board():
         i = 0
         for y in range(len(self.playable2)):
             for x in self.playable2[y]:
-                self.pawns[x][y] = self.pieces[int(i/self.width)][i%self.width]
+                self.pawns[y][x] = self.pieces[int(i/self.width)][i%self.width]
                 i +=1
 
 
