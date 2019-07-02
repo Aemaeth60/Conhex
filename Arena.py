@@ -1,7 +1,7 @@
 import numpy as np
 from pytorch_classification.utils import Bar, AverageMeter
 import time
-from conhex import design
+#from conhex import design
 import conhex.ConHexPlayers
 import pygame
 
@@ -27,7 +27,7 @@ class Arena():
         self.player2 = player2
         self.game = game
         self.display = display
-        design.drawBoard()
+        #design.drawBoard()
 
     def playGame(self, verbose=False):
         """
@@ -44,6 +44,7 @@ class Arena():
         board = self.game.getInitBoard()
         it = 0
         while self.game.getGameEnded(board, curPlayer)==0:
+            """
             textSurfaceEmpty = design.myfont.render(design.getTextFromPlayer(-curPlayer),False,design.colorBoard)
             design.screen.blit(textSurfaceEmpty,(500,100))
 
@@ -51,6 +52,7 @@ class Arena():
             textsurface = design.myfont.render(text, False, design.getColorFromPlayer(curPlayer))
             design.screen.blit(textsurface,(500,100))
             pygame.display.update()
+            """
             it+=1
             if verbose:
                 assert(self.display)
@@ -58,6 +60,7 @@ class Arena():
                 print("Areas player blue : ", self.game.b_areas)
                 print("Turn ", str(it), "Player ", str(curPlayer))
                 self.display(board)
+            """
             for i in self.game.r_areas:
             	design.listPolygone[i-1] = pygame.draw.polygon(design.screen, design.red, design.tabPosPoly[i-1])
             	pygame.display.update()
@@ -70,10 +73,11 @@ class Arena():
                 print("oui")
             else:
                 action = players[curPlayer+1](self.game.getCanonicalForm(board, curPlayer))
+            """
                 
             #action = design.getCircle()
             action = players[curPlayer+1](self.game.getCanonicalForm(board, curPlayer))
-            design.screen.fill(design.getColorFromPlayer(curPlayer),design.circles[action])
+            #design.screen.fill(design.getColorFromPlayer(curPlayer),design.circles[action])
 
             valids = self.game.getValidMoves(self.game.getCanonicalForm(board, curPlayer),1)
 
