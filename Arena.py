@@ -3,7 +3,7 @@ from pytorch_classification.utils import Bar, AverageMeter
 import time
 #from conhex import design
 #import conhex.ConHexPlayers
-import pygame
+#import pygame
 
 
 
