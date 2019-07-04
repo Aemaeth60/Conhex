@@ -143,14 +143,14 @@ def main():
 
     screen.fill(colorBoard)
     screen.blit(textsurface,(500,100))
-    #drawBoard()
+    drawBoard()
 
     # define a variable to control the main loop
-    """
+    
     running = True
     # main loop
     while running:
-        pos = pygame.mouse.get_pos()
+        """pos = pygame.mouse.get_pos()
         # event handling, gets all event from the event queue
         for event in pygame.event.get():
             # only do something if the event is of type QUIT
@@ -211,9 +211,9 @@ def getCircle():
     return cir
 
 def getColorFromPlayer(curPlayer):
-	if curPlayer==-1:
-		return red
 	if curPlayer==1:
+		return red
+	if curPlayer==-1:
 		return blue
 
 def switchPlayer(curPlayer):
@@ -224,7 +224,7 @@ def switchPlayer(curPlayer):
 def getColor(c):
 	if c == 0:
 		return colorNode
-	elif c == 1:
+	elif c == -1:
 		return blue
 	else:
 		return red
@@ -234,22 +234,33 @@ def getTextFromPlayer(curPlayer):
 		return "Your turn, player 1"
 	return "Your turn, player -1"
 
-def drawBoard():
 
+def drawBoard():
     pygame.display.set_caption("Cohnex")
     screen.fill(colorBoard)
     
     
+    
     textsurface = myfont.render(text, False, getColorFromPlayer(1))
     screen.blit(textsurface,(500,100))
+    for i in range(len(posFake)):
+        circlesFake.append(pygame.draw.circle(screen,colorBoard,posFake[i],sizeNode))
+
+
     for i in range(len(posTotal)):
         totalCircles.append(pygame.draw.circle(screen,colorBoard,posTotal[i],sizeNode))
+
+    pygame.draw.rect(screen,blue,pygame.Rect(10,0,480,10))
+    pygame.draw.rect(screen,blue,pygame.Rect(10,490,480,500))
+
+    pygame.draw.rect(screen,red,pygame.Rect(0,10,10,480))
+    pygame.draw.rect(screen,red,pygame.Rect(490,10,10,480))
+
 
     for i in range(len(pos)):
         circles.append(pygame.draw.circle(screen,colorNode,pos[i],sizeNode))
 
-    for i in range(len(posFake)):
-        circlesFake.append(pygame.draw.circle(screen,colorBoard,posFake[i],sizeNode))
+
 
     
     for i in range(len(pawns_places)):
