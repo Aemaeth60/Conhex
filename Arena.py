@@ -1,8 +1,8 @@
 import numpy as np
 from pytorch_classification.utils import Bar, AverageMeter
 import time
-from conhex import design
-import conhex.ConHexPlayers
+#from conhex import design
+#import conhex.ConHexPlayers
 import pygame
 
 
@@ -38,13 +38,14 @@ class Arena():
             or
                 draw result returned from the game that is neither 1, -1, nor 0.
         """
-        design.drawBoard()
+        #design.drawBoard()
         players = [self.player2, None, self.player1]
         curPlayer = 1
         board = self.game.getInitBoard()
         it = 0
 
         while self.game.getGameEnded(board, curPlayer)==0:
+            """
             for i in self.game.r_areas:
             	design.listPolygone[i-1] = pygame.draw.polygon(design.screen, design.red, design.tabPosPoly[i-1])
             	pygame.display.update()
@@ -59,6 +60,7 @@ class Arena():
             textsurface = design.myfont.render(text, False, design.getColorFromPlayer(curPlayer))
             design.screen.blit(textsurface,(500,100))
             pygame.display.update()
+            """
             
             it+=1
             if verbose:
@@ -69,17 +71,18 @@ class Arena():
                 self.display(board)
             
             
-
+            """
             if hasattr(players[curPlayer+1], 'trick'):
                 action = design.getCircle()
                 print("oui")
             else:
-                action = players[curPlayer+1](self.game.getCanonicalForm(board, curPlayer))
+            """
+            action = players[curPlayer+1](self.game.getCanonicalForm(board, curPlayer))
             
                 
-            action = design.getCircle()
+            #action = design.getCircle()
             #action = players[curPlayer+1](self.game.getCanonicalForm(board, curPlayer))
-            design.screen.fill(design.getColorFromPlayer(curPlayer),design.circles[action])
+           # design.screen.fill(design.getColorFromPlayer(curPlayer),design.circles[action])
 
             valids = self.game.getValidMoves(self.game.getCanonicalForm(board, curPlayer),1)
 
@@ -94,6 +97,7 @@ class Arena():
             print("Areas player blue : ", self.game.b_areas)
             print("Game over: Turn ", str(it), "Result ", str(self.game.getGameEnded(board, 1)))
             self.display(board)
+            """
             textSurfaceEmpty = design.myfont.render(design.getTextFromPlayer(-curPlayer),False,design.colorBoard)
             design.screen.blit(textSurfaceEmpty,(500,100))
 
@@ -109,6 +113,7 @@ class Arena():
             	pygame.display.update()
 
             time.sleep(500)
+            """
 
         return self.game.getGameEnded(board, 1)
 

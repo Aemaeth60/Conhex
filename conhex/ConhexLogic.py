@@ -143,7 +143,6 @@ class Board():
 
         # Add the piece to the empty square.
         # print(move)
-        self.__fillPawns()
         (x, y) = move
         #assert self[x][y] == 0
         if(self[x][y] != 0):
@@ -151,6 +150,7 @@ class Board():
             raise AssertionError()
             
         self[x][y] = color
+        self.__fillPawns()
 
     def __fillPawns(self):
 
