@@ -150,9 +150,9 @@ class Board():
             raise AssertionError()
             
         self[x][y] = color
-        self.__fillPawns()
+        self.fillPawns()
 
-    def __fillPawns(self):
+    def fillPawns(self):
 
         i = 0
         for y in range(len(self.playable2)):

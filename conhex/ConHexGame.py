@@ -100,6 +100,7 @@ class ConHexGame(Game):
         # player = 1
         b = Board(self.n, self.width, self.height)
         b.pieces = np.copy(board)
+        b.fillPawns()
 
         """
         r_won = b.hasWon(player, self.r_areas)
