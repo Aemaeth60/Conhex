@@ -65,8 +65,8 @@ class Arena():
             it+=1
             if verbose:
                 assert(self.display)
-                print("Areas player red : ", self.game.r_areas)
-                print("Areas player blue : ", self.game.b_areas)
+                #print("Areas player red : ", self.game.r_areas)
+                #print("Areas player blue : ", self.game.b_areas)
                 print("Turn ", str(it), "Player ", str(curPlayer))
                 self.display(board)
             
@@ -93,8 +93,8 @@ class Arena():
 
         if verbose:
             assert(self.display)
-            print("Areas player red : ", self.game.r_areas)   
-            print("Areas player blue : ", self.game.b_areas)
+            #print("Areas player red : ", self.game.r_areas)   
+            #print("Areas player blue : ", self.game.b_areas)
             print("Game over: Turn ", str(it), "Result ", str(self.game.getGameEnded(board, 1)))
             self.display(board)
             """

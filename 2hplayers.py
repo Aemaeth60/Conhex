@@ -12,15 +12,15 @@ use this script to play any two agents against each other, or play manually with
 any agent.
 """
 
-g = ConHexGame(17, 23, 3)
+g = ConHexGame()
 
 # all players
 #rp = RandomPlayer(g).play
 #gp = GreedyOthelloPlayer(g).play
-#hp = HumanConHexPlayer(g).play
-#hp2 = HumanConHexPlayer(g).play
-hp = GHumanConhexPlayer(g).play
-hp2 = GHumanConhexPlayer(g).play
+hp = HumanConHexPlayer(g).play
+hp2 = HumanConHexPlayer(g).play
+#hp = GHumanConhexPlayer(g).play
+#hp2 = GHumanConhexPlayer(g).play
 # nnet players
 """
 n1 = NNet(g)

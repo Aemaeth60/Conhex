@@ -1,3 +1,4 @@
+"""
 import keyboard
 from datetime import datetime
 from ConhexLogic import Board
@@ -32,3 +33,12 @@ while i < len(b.areas_dict):
 
     print("   -----------------------")
     i +=1
+
+
+"""
+
+from ConhexLogic import Board
+
+b = Board()
+for i in b.pieces:
+    print(i)

@@ -40,7 +40,7 @@ class Coach():
         """
         trainExamples = []
         board = self.game.getInitBoard()
-        self.curPlayer = 1
+        self.curPlayer = -1
         episodeStep = 0
 
         while True:
