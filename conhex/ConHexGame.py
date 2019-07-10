@@ -101,14 +101,15 @@ class ConHexGame(Game):
         return board.tostring()
 
     def getScore(self, board, player):
-        b = Board(self.n, self.width, self.height)
+        b = Board()
         b.pieces = np.copy(board)
         score = 0
+        red, blue = b.getAreas()
 
         if player == 1:
-            score = len(self.r_areas)
+            score = len(red)
         else:
-            score = len(self.b_areas)
+            score = len(blue)
         return score
 
 
