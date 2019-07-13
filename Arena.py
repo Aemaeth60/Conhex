@@ -68,7 +68,6 @@ class Arena():
                 self.display(board)
         
             action = players[curPlayer+1](self.game.getCanonicalForm(board, curPlayer))
-            print("act", action)
             
                 
             #action = design.getCircle()
@@ -82,6 +81,7 @@ class Arena():
                 print(action)
                 assert valids[action] >0
             board, curPlayer = self.game.getNextState(board, curPlayer, action)
+            time.sleep(1)
 
         if verbose:
             assert(self.display)
@@ -92,8 +92,8 @@ class Arena():
             self.display(board)
 
             if self.graphic != None:
-                self.graphic.fillPoly(red)
-                self.graphic.fillPoly(blue)
+                self.graphic.fillPoly(red, "red")
+                self.graphic.fillPoly(blue, "blue")
                 self.graphic.showText(curPlayer)
 
 
