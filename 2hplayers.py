@@ -2,6 +2,7 @@ import Arena
 from MCTS import MCTS
 from conhex.ConHexGame import ConHexGame, display
 from conhex.ConHexPlayers import *
+from conhex.design import pygameBoard
 #from othello.pytorch.NNet import NNetWrapper as NNet
 
 import numpy as np
@@ -17,10 +18,11 @@ g = ConHexGame()
 # all players
 #rp = RandomPlayer(g).play
 #gp = GreedyOthelloPlayer(g).play
-hp = HumanConHexPlayer(g).play
-hp2 = HumanConHexPlayer(g).play
-#hp = GHumanConhexPlayer(g).play
-#hp2 = GHumanConhexPlayer(g).play
+#hp = HumanConHexPlayer(g).play
+#hp2 = HumanConHexPlayer(g).play
+pyg = pygameBoard()
+hp = GHumanConhexPlayer(g, pyg).play
+hp2 = GHumanConhexPlayer(g, pyg).play
 # nnet players
 """
 n1 = NNet(g)
@@ -36,5 +38,5 @@ n1p = lambda x: np.argmax(mcts1.getActionProb(x, temp=0))
 #mcts2 = MCTS(g, n2, args2)
 #n2p = lambda x: np.argmax(mcts2.getActionProb(x, temp=0))
 
-arena = Arena.Arena(hp, hp2, g, display=display)
+arena = Arena.Arena(hp, hp2, g, display=display, graphic=pyg)
 print(arena.playGames(2, verbose=True))

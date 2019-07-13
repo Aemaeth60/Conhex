@@ -25,6 +25,13 @@ class ConHexGame(Game):
         #return sum(len(x) for x in Board.playable) +1
         return self.width*self.height# + 1
 
+    def getArea(self, board):
+        b = Board()
+        b.pieces = np.copy(board)
+
+        return b.getAreas()
+
+
     def getNextState(self, board, player, action):
         # if player takes action on board, return next (board,player)
         # action must be a valid move

@@ -38,12 +38,25 @@ class HumanConHexPlayer():
         return a
 
 class GHumanConhexPlayer():
-    trick = 0
-    def __init__(self, game):
-        self.game = game
 
+    def __init__(self, game, pygame):
+        self.game = game
+        self.pygame = pygame
+
+    
     def play(self, board):
-        return 0
+        while True:
+            action = 0
+            valid = self.game.getValidMoves(board, 1)
+            idx = self.pygame.getCircle()
+            action = valid[idx]
+
+            if action == 0:
+                print("Invalid")
+                continue
+            else:
+                break
+        return idx
         """
         # display(board)
         valid = self.game.getValidMoves(board, 1)

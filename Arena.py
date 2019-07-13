@@ -11,7 +11,7 @@ class Arena():
     """
     An Arena class where any 2 agents can be pit against each other.
     """
-    def __init__(self, player1, player2, game, display=None):
+    def __init__(self, player1, player2, game, display=None, graphic=None):
         """
         Input:
             player 1,2: two functions that takes board as input, return action
@@ -27,6 +27,7 @@ class Arena():
         self.player2 = player2
         self.game = game
         self.display = display
+        self.graphic = graphic
 
     def playGame(self, verbose=False):
         """
@@ -38,51 +39,42 @@ class Arena():
             or
                 draw result returned from the game that is neither 1, -1, nor 0.
         """
-        #design.drawBoard()
+        """
+        if self.graphic != None:
+            self.graphic.drawBoard(
+        """
+
         players = [self.player2, None, self.player1]
         curPlayer = 1
         board = self.game.getInitBoard()
         it = 0
 
         while self.game.getGameEnded(board, curPlayer)==0:
-            """
-            for i in self.game.r_areas:
-            	design.listPolygone[i-1] = pygame.draw.polygon(design.screen, design.red, design.tabPosPoly[i-1])
-            	pygame.display.update()
-            for i in self.game.b_areas:
-            	design.listPolygone[i-1] = pygame.draw.polygon(design.screen, design.blue, design.tabPosPoly[i-1])
-            	pygame.display.update()
-            
-            textSurfaceEmpty = design.myfont.render(design.getTextFromPlayer(-curPlayer),False,design.colorBoard)
-            design.screen.blit(textSurfaceEmpty,(500,100))
 
-            text = design.getTextFromPlayer(curPlayer)
-            textsurface = design.myfont.render(text, False, design.getColorFromPlayer(curPlayer))
-            design.screen.blit(textsurface,(500,100))
-            pygame.display.update()
-            """
+            red, blue = self.game.getArea(board)
+
+            if self.graphic != None:
+                self.graphic.fillPoly(red)
+                self.graphic.fillPoly(blue)
+                self.graphic.showText(curPlayer)
+
             
             it+=1
             if verbose:
                 assert(self.display)
-                #print("Areas player red : ", self.game.r_areas)
-                #print("Areas player blue : ", self.game.b_areas)
+                print("Areas player red : ", red)
+                print("Areas player blue : ", blue)
                 print("Turn ", str(it), "Player ", str(curPlayer))
                 self.display(board)
-            
-            
-            """
-            if hasattr(players[curPlayer+1], 'trick'):
-                action = design.getCircle()
-                print("oui")
-            else:
-            """
+        
             action = players[curPlayer+1](self.game.getCanonicalForm(board, curPlayer))
+            print("act", action)
             
                 
             #action = design.getCircle()
             #action = players[curPlayer+1](self.game.getCanonicalForm(board, curPlayer))
-           # design.screen.fill(design.getColorFromPlayer(curPlayer),design.circles[action])
+            if self.graphic != None:
+                self.graphic.fillNodes(curPlayer, action)
 
             valids = self.game.getValidMoves(self.game.getCanonicalForm(board, curPlayer),1)
 
@@ -93,27 +85,17 @@ class Arena():
 
         if verbose:
             assert(self.display)
-            #print("Areas player red : ", self.game.r_areas)   
-            #print("Areas player blue : ", self.game.b_areas)
+            red, blue = self.game.getArea(board)
+            print("Areas player red : ", red)   
+            print("Areas player blue : ", blue)
             print("Game over: Turn ", str(it), "Result ", str(self.game.getGameEnded(board, 1)))
             self.display(board)
-            """
-            textSurfaceEmpty = design.myfont.render(design.getTextFromPlayer(-curPlayer),False,design.colorBoard)
-            design.screen.blit(textSurfaceEmpty,(500,100))
 
-            text = "Congratulation " + str(curPlayer) + "!"
-            textsurface = design.myfont.render(text, False, design.getColorFromPlayer(curPlayer))
-            design.screen.blit(textsurface,(500,100))
-            pygame.display.update()
-            for i in self.game.r_areas:
-            	design.listPolygone[i-1] = pygame.draw.polygon(design.screen, design.red, design.tabPosPoly[i-1])
-            	pygame.display.update()
-            for i in self.game.b_areas:
-            	design.listPolygone[i-1] = pygame.draw.polygon(design.screen, design.blue, design.tabPosPoly[i-1])
-            	pygame.display.update()
+            if self.graphic != None:
+                self.graphic.fillPoly(red)
+                self.graphic.fillPoly(blue)
+                self.graphic.showText(curPlayer)
 
-            time.sleep(500)
-            """
 
         return self.game.getGameEnded(board, 1)
 
