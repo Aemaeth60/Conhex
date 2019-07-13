@@ -54,8 +54,8 @@ class Arena():
             red, blue = self.game.getArea(board)
 
             if self.graphic != None:
-                self.graphic.fillPoly(red)
-                self.graphic.fillPoly(blue)
+                self.graphic.fillPoly(red, "red")
+                self.graphic.fillPoly(blue, "blue")
                 self.graphic.showText(curPlayer)
 
             

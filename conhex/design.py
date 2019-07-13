@@ -303,9 +303,12 @@ class pygameBoard():
        
         pygame.display.update()
 
-    def fillPoly(self, list):
+    def fillPoly(self, list, color):
         for i in list:
-            self.listPolygone[i-1] = pygame.draw.polygon(self.screen, self.red, self.tabPosPoly[i-1])
+            if color == "red":
+                self.listPolygone[i-1] = pygame.draw.polygon(self.screen, self.red, self.tabPosPoly[i-1])
+            if color == "blue":
+                self.listPolygone[i-1] = pygame.draw.polygon(self.screen, self.blue, self.tabPosPoly[i-1])
             pygame.display.update()
 
     def showText(self, curPlayer):
