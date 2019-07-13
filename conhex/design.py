@@ -425,6 +425,44 @@ class pygameBoard():
     		return "Your turn, player 1"
     	return "Your turn, player -1"
 
+    def drawBoard(self):
+        pygame.init()
+        pygame.display.set_caption("Cohnex")
+        self.screen.fill(self.colorBoard)
+        
+        
+        
+        self.textsurface = self.myfont.render(self.text, False, self.getColorFromPlayer(1))
+        self.screen.blit(self.textsurface,(500,100))
+        for i in range(len(self.posFake)):
+            self.circlesFake.append(pygame.draw.circle(self.screen,self.colorBoard,self.posFake[i],self.sizeNode))
+
+
+        for i in range(len(self.posTotal)):
+            self.totalCircles.append(pygame.draw.circle(self.screen,self.colorBoard,self.posTotal[i],self.sizeNode))
+
+        pygame.draw.rect(self.screen,self.blue,pygame.Rect(10,0,480,10))
+        pygame.draw.rect(self.screen,self.blue,pygame.Rect(10,490,480,500))
+
+        pygame.draw.rect(self.screen,self.red,pygame.Rect(0,10,10,480))
+        pygame.draw.rect(self.screen,self.red,pygame.Rect(490,10,10,480))
+
+
+        for i in range(len(self.pos)):
+            self.circles.append(pygame.draw.circle(self.screen,self.colorNode,self.pos[i],self.sizeNode))
+
+
+
+        
+        for i in range(len(self.pawns_places)):
+            for j in self.pawns_places[i]:
+                self.liste[j-1].append([self.posTotal[i][0],self.posTotal[i][1]])
+        
+        for i in range(len(self.listColor)):
+            self.listPolygone.append(pygame.draw.polygon(self.screen, self.getColor(self.listColor[i]), self.tabPosPoly[i],1))  #1
+
+        pygame.display.update()
+
 
 """
     # run the main function only if this module is executed as the main script

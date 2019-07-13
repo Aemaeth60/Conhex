@@ -48,6 +48,7 @@ class Arena():
         curPlayer = 1
         board = self.game.getInitBoard()
         it = 0
+        self.graphic.drawBoard()
 
         while self.game.getGameEnded(board, curPlayer)==0:
 
