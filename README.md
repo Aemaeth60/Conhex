@@ -8,7 +8,7 @@ To DO :
         plan to do a learning session
 
 ##################################################################################
-Original README 
+# Original README 
 
 # Alpha Zero General (any game, any framework!)
 
