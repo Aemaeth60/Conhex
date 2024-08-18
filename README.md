@@ -7,6 +7,8 @@ To DO :
         test the game with two humans players to see if victory is detected
         plan to do a learning session
 
+#Original README 
+
 # Alpha Zero General (any game, any framework!)
 
 A simplified, highly flexible, commented and (hopefully) easy to understand implementation of self-play based reinforcement learning based on the AlphaGo Zero paper (Silver et al). It is designed to be easy to adopt for any two-player turn-based adversarial game and any deep learning framework of your choice. A sample implementation has been provided for the game of Othello in PyTorch, Keras, TensorFlow and Chainer. An accompanying tutorial can be found [here](http://web.stanford.edu/~surag/posts/alphazero.html). We also have implementations for GoBang and TicTacToe.
@@ -53,6 +55,3 @@ While the current code is fairly functional, we could benefit from the following
 * [Jernej Habjan](https://github.com/JernejHabjan) contributed RTS game.
 
 Thanks to [pytorch-classification](https://github.com/bearpaw/pytorch-classification) and [progress](https://github.com/verigak/progress).
-
-# Conhex
-# Conhex
